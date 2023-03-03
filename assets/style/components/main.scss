@@ -1,0 +1,22 @@
+*, *:after, *:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+ul, ol, li {
+    list-style-type: none;
+}
+
+.wrapper {
+    max-width: 1620px;
+    margin: 0 auto;
+}
+
+.site {
+    margin-top: 124px;
+}

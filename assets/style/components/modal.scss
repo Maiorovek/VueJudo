@@ -1,0 +1,45 @@
+.modal-edit__wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .7);
+    width: 100vw;
+    height: 100vh;
+
+    .modal-edit {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 15px;
+        padding: 20px;
+        background: #fff;
+    }
+
+    .modal-edit__close {
+        position: absolute;
+        background: #fff;
+        border-radius: 50%;
+        right: -30px;
+        top: -30px;
+        width: 30px;
+        height: 30px;
+
+        svg {
+            transition: transform .2s linear;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            svg {
+                transform: scale(1.3);
+                transition: transform .2s linear;
+            }
+        }
+    }
+
+    .modal-edit__title {
+
+    }
+}

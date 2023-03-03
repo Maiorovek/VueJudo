@@ -1,0 +1,40 @@
+.header-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #003882;
+    color: #fff;
+    width: 100%;
+    height: auto;
+    padding: 20px 10px;
+
+    .header-section__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-section__logo {
+        max-width: 80px;
+
+        & > * {
+            max-width: 100%;
+        }
+    }
+
+    .header-section__list {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+    }
+
+    .header-section__item a {
+        text-decoration: unset;
+        text-transform: uppercase;
+        color: #ffffff;
+
+        &.router-link-active {
+            color: red
+        }
+    }
+}
