@@ -13,11 +13,10 @@
 <script>
 import {useStore} from "~/store";
 import adminEdit from "~/components/admin/admin-edit.vue";
-
 export default {
   name: "admin-main",
   components: {
-    adminEdit
+    adminEdit,
   },
   setup() {
     useHead({

@@ -1,28 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="18b46ac3-8026-449b-b0b7-4f2f87394722" name="Changes" comment="" />
+    <list default="true" id="18b46ac3-8026-449b-b0b7-4f2f87394722" name="Changes" comment="Проверка">
+      <change afterPath="$PROJECT_DIR$/assets/style/components/buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/style/components/input.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/admin/add-articles.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/admin/admin-sidebar-tabs.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/admin/admin-sidebar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/editor/Editor.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/editor/Editor2.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/editor/EditorMenuBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/editor/EditorMenuItem.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/editor/data.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/style/components/admin/app-admin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/style/components/admin/app-admin.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/style/components/modal.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/style/components/modal.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/style/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/style/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EditedModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/EditedModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/admin/admin-articles.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/admin/admin-articles.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/admin/admin-categories.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/admin/admin-categories.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/admin/admin-edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/admin/admin-edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/admin/admin-main.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/admin/admin-main.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layouts/admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/admin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nuxt.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2MVUcFvKkxIYVmBBwhAGgS1sZmj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/evgeny/Library/Application Support/JetBrains/Toolbox/apps/WebStorm/ch-0/223.8617.44/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/components/editor" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -32,10 +86,22 @@
       <option name="presentableId" value="Default" />
       <updated>1677852320239</updated>
       <workItem from="1677852321354" duration="7000" />
+      <workItem from="1677917432416" duration="1239000" />
+      <workItem from="1677923398569" duration="598000" />
+      <workItem from="1677957218645" duration="4104000" />
+      <workItem from="1677964747777" duration="20000" />
+      <workItem from="1678012328031" duration="12470000" />
+      <workItem from="1678114366422" duration="13327000" />
+      <workItem from="1678204313695" duration="26392000" />
+      <workItem from="1678347247874" duration="27664000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="javascript:npm:nuxt" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:postcss" />
   </component>
 </project>

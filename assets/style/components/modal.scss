@@ -5,6 +5,7 @@
     background: rgba(0, 0, 0, .7);
     width: 100vw;
     height: 100vh;
+    z-index: 999;
 
     .modal-edit {
         position: absolute;
@@ -14,6 +15,7 @@
         border-radius: 15px;
         padding: 20px;
         background: #fff;
+        width: 600px;
     }
 
     .modal-edit__close {
@@ -24,6 +26,9 @@
         top: -30px;
         width: 30px;
         height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         svg {
             transition: transform .2s linear;
@@ -40,6 +45,16 @@
     }
 
     .modal-edit__title {
+        margin-bottom: 20px;
+        font-size: 26px;
+    }
 
+    .modal-edit__buttons {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 180px;
+        margin-top: 30px;
     }
 }
