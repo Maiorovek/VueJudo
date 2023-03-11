@@ -1,12 +1,17 @@
 <template>
   <section class="admin">
     <slot />
+    <EditedModal />
   </section>
 </template>
 
 <script>
+import EditedModal from "~/components/EditedModal.vue";
 export default {
-  name: "admin"
+  name: "admin",
+  components: {
+    EditedModal,
+  },
 }
 </script>
 

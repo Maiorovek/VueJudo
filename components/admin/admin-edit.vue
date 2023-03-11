@@ -3,7 +3,7 @@
     <h3 class="admin-item-title" v-text="editItem[1].name" />
     <div class="admin-item-edit">
       <input
-        class="edit-input"
+        class="input edit-input"
         type="text"
         v-model="defaultParam"
       />
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     saveChange() {
-      
+
     },
     cancelChange() {
       this.defaultParam = this.editItem
