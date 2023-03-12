@@ -1,8 +1,7 @@
 <template>
   <div class="main-section">
     <div class="wrapper">
-      <h1>Welcome to the homepage</h1>
-      <img src="" alt="">
+      <h1>Welcome to the homepage 222</h1>
       <NewsSection />
     </div>
   </div>
@@ -19,6 +18,9 @@ export default {
   },
   setup() {
     const siteInfo = computed(() => useStore().getSiteSetting)
+    definePageMeta({
+      layout: "default",
+    });
     useHead({
       title: `${siteInfo.value.name.param}`,
     })

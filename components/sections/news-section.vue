@@ -2,21 +2,22 @@
   <section class="news-section">
     <input type="file" ref="myFiles" @change="decoder" multiple>
     <img :src="image" alt="">
+    {{ image }}
   </section>
 </template>
 
 <script>
-import decoderImage from '@/utils/decoder-image'
+import decoderImage from "~/utils/decoder-image";
 export default {
   name: "news-section",
   data() {
     return {
-      image: ''
+      image: '123123'
     }
   },
   methods: {
-    decoder(event) {
-       this.image = decoderImage(event.target)
+    decoder() {
+      console.log(decoderImage(this.$refs.myFiles))
     }
   },
 }
