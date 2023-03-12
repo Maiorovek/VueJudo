@@ -1,10 +1,13 @@
-async function encodeImageFileAsURL(element) {
-    let file = element.files[0];
-    let reader = new FileReader();
-    reader.onloadend = () => {
-        return reader.result
-    }
+async function decoderImage(element) {
+    const file = element.files[0];
+    const reader = new FileReader();
+    const promise = new Promise((resolve) => {
+        reader.onload = () => {
+            resolve(reader.result)
+        }
+    });
     reader.readAsDataURL(file);
-}
-
-export default encodeImageFileAsURL
+    const result = await promise
+    return result 
+} 
+export default decoderImage

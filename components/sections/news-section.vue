@@ -15,13 +15,8 @@ export default {
     }
   },
   methods: {
-    Decoder() {
-      let file = this.$refs.myFiles.files[0];
-      let reader = new FileReader();
-      reader.onloadend = () => {
-        this.image = reader.result
-      }
-      reader.readAsDataURL(file);
+    async decoder() {
+      console.log(await decoderImage(this.$refs.myFiles))
     }
   },
 }
