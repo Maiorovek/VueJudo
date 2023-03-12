@@ -1,7 +1,13 @@
 const decoderImage = (element) => {
+    let value
     const file = element.files[0];
     const reader = new FileReader();
-    reader.onloadend = () => { return reader.result }
+    console.log(reader)
+    reader.onloadend = () => {
+        value = reader.result
+    }
     reader.readAsDataURL(file);
+    return value
 }
+
 export default decoderImage
