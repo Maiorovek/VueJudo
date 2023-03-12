@@ -579,7 +579,7 @@
     "vite-plugin-checker" "^0.5.5"
     "vue-bundle-renderer" "^1.0.1"
 
-"@nuxtjs/auth-next@5.0.0-1667386184.dfbbb54":
+"@nuxtjs/auth-next@^5.0.0-1667386184.dfbbb54":
   "integrity" "sha512-ODUw/y7oTRGvzOQbtoJg7yqOiJ1XuPecmtdSnZukx1x942HL5dRNIarfjdsANP8B3zsyjZ3qyzmo/dzhsJYD6g=="
   "resolved" "https://registry.npmjs.org/@nuxtjs/auth-next/-/auth-next-5.0.0-1667386184.dfbbb54.tgz"
   "version" "5.0.0-1667386184.dfbbb54"

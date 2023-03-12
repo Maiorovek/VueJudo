@@ -1,0 +1,27 @@
+.auth {
+    position: relative;
+    background: #E6ECF3;
+    width: 100vw;
+    height: 100vh;
+
+    &__inner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        min-width: 400px;
+        min-height: 600px;
+
+        .auth-title {
+            text-align: center;
+        }
+
+        .auth-button {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

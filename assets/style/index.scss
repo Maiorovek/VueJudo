@@ -1,8 +1,13 @@
 @import "components/main";
 @import "components/buttons";
 @import "components/input";
+@import "components/checbox";
 @import "components/modal";
 @import "components/app-main";
 @import "components/app-header";
 @import "components/app-footer";
+@import "components/app-auth";
 @import "components/admin/app-admin";
+
+// Sections
+@import "components/sections/news-section";

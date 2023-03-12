@@ -1,7 +1,7 @@
 <template>
   <section class="news">
     <div class="wrapper">
-      123
+      News
     </div>
   </section>
 </template>

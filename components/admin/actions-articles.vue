@@ -11,10 +11,7 @@
         label="Название сайта"
         v-model="articleName"
       />
-      <v-checkbox
-        v-model="articleStatus"
-        label="Опубликовано"
-      />
+      <input type="checkbox" class="checkbox"  v-model="articleStatus">
       <el-select v-model="articleCategory" class="m-2" placeholder="Select">
         <el-option
           v-for="item in listCategory"
@@ -43,9 +40,6 @@ export default {
     Editor2,
   },
   computed: {
-    editorContent() {
-      return this.dataPage.data.content ? this.dataPage.data.content : ``
-    },
     dataPage() {
       return useStore().getDataArticle
     },
@@ -59,7 +53,7 @@ export default {
       articleId: null,
       articleStatus: false,
       articleName: '',
-      articleCategory: null,
+      articleCategory: '',
       articleContent: '',
     }
   },
@@ -74,7 +68,7 @@ export default {
       this.articleStatus = this.dataPage.data.status
       this.articleContent = this.dataPage.data.content
       this.articleName = this.dataPage.data.name
-      this.articleCategory = useStore().categories.find(item => item.id === this.dataPage.data.category).name
+      this.articleCategory = this.listCategory.find(item => item.id === this.dataPage.data.category).id
     }
   },
   methods: {

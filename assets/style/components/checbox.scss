@@ -1,0 +1,25 @@
+.checkbox {
+    --s: 25px;
+    --_g: radial-gradient(calc(25px / 2), #15202a 96%, #0000);
+    height: var(--s);
+    aspect-ratio: 2.5;
+    width: auto;
+    border-radius: var(--s);
+    padding: calc(var(--s) / 10);
+    display: grid;
+    cursor: pointer;
+    background: var(--_g) var(--_p, 0%) 50%/var(--s) 33% no-repeat content-box, #ff7a7a;
+    box-sizing: content-box;
+    overflow: hidden;
+    appearance: none;
+}
+
+.checkbox:after {
+    content: "";
+    background: var(--_g) var(--_p,0%)/var(--s) 100% no-repeat;
+}
+
+.checkbox:checked {
+    background-color: #85ff7a;
+    --_p: 100%;
+}

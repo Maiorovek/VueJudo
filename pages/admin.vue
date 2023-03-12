@@ -16,6 +16,7 @@ import actionsArticles from "~/components/admin/actions-articles.vue";
 import adminSidebar from "~/components/admin/admin-sidebar.vue";
 
 export default {
+  middleware: ['auth-admin'],
   setup() {
     const siteInfo = computed(() => useStore().getSiteSetting)
     definePageMeta({

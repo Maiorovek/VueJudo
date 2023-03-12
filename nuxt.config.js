@@ -1,5 +1,11 @@
 export default defineNuxtConfig({
 
+    head: {
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: 'public/favicon.png' }
+        ]
+    },
+
     css: [
         '@/assets/style/index.scss',
         'vuetify/lib/styles/main.sass',
@@ -15,5 +21,4 @@ export default defineNuxtConfig({
     build: {
         transpile: ['vuetify'],
     },
-
 })

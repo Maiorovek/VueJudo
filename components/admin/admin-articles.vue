@@ -9,9 +9,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="date" label="Дата"/>
-      <el-table-column prop="status" label="Активность">
+      <el-table-column prop="status" label="Опубликовано">
         <template #default="scope">
-          <input type="checkbox" v-model="scope.row.status">
+          <input type="checkbox" class="checkbox" v-model="scope.row.status">
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Действия" width="250">
