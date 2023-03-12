@@ -11,11 +11,11 @@
       Пользователь
     </div>
     <nuxt-link class="tab-item__top" to="/">
-      <v-icon icon="mdi-sitemap-outline" />
+      <v-icon icon="mdi-sitemap-outline"/>
       <span v-text="'Открыть сайт'"/>
     </nuxt-link>
     <div class="tab-item__top">
-      <v-icon icon="mdi-logout" />
+      <v-icon icon="mdi-logout"/>
       <span v-text="'Выйти'"/>
     </div>
   </div>
@@ -23,15 +23,14 @@
 
 <script>
 import adminSidebarTabs from "~/components/admin/admin-sidebar-tabs.vue";
+
 export default {
   name: "admin-sidebar",
   components: {
     adminSidebarTabs
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
     currentComponent(component) {

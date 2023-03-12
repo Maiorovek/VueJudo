@@ -1,17 +1,23 @@
 <template>
   <div class="admin-view__inner">
-    {{dataPage}}
     <div class="admin-title__wrapper">
-      <h2 class="admin-title" v-text="dataPage.action === 'add' ? 'Добавление статьи' : 'Редактирование статьи'"/>
+      <h2 class="admin-title" v-text="pageName"/>
       <el-button @click="returnToBack">Назад</el-button>
     </div>
-    <div>
-      <v-text-field
-        сlass="admin-input input"
-        label="Название сайта"
-        v-model="articleName"
-      />
-      <input type="checkbox" class="checkbox"  v-model="articleStatus">
+    <v-text-field
+      сlass="admin-input input"
+      label="Название сайта"
+      v-model="articleName"
+    />
+    <v-checkbox v-model="articleStatus">
+      <template v-slot:label>
+        <div>
+          Опубликовано
+        </div>
+      </template>
+    </v-checkbox>
+    <div class="admin-flex">
+      <span>Категория: </span>
       <el-select v-model="articleCategory" class="m-2" placeholder="Select">
         <el-option
           v-for="item in listCategory"
@@ -21,11 +27,27 @@
         />
       </el-select>
     </div>
+    <v-file-input
+      label="Превью"
+      ref="image"
+      prepend-icon=""
+      @change="imageEdit"
+    />
+    <img :src="articlePreview" alt="Превью" class="admin-preview">
     <Editor2 :content="articleContent" @valueEditor="valueEditor"/>
     <div class="admin-buttons__wrapper">
-      <el-button class="admin-add" type="success" @click="addItem"
-                 v-text="dataPage.action === 'add' ? 'Добавить статью' : 'Изменить статью'"/>
-      <el-button class="admin-add" type="danger" @click="cancel">Отменить</el-button>
+      <el-button
+        class="admin-add"
+        type="success"
+        @click="addItem"
+        v-text="buttonName"
+      />
+      <el-button
+        class="admin-add"
+        type="danger"
+        @click="cancel"
+        v-text="'Отменить'"
+      />
     </div>
   </div>
 </template>
@@ -36,16 +58,11 @@ import {useStore} from "~/store";
 
 export default {
   name: "add-articles",
-  components: {
-    Editor2,
-  },
-  computed: {
-    dataPage() {
-      return useStore().getDataArticle
-    },
-    listCategory() {
-      return useStore().getCategories
-    },
+  components: {Editor2},
+  setup() {
+    useHead({
+      titleTemplate: '%s : Добавление статьи',
+    })
   },
   data() {
     return {
@@ -55,12 +72,22 @@ export default {
       articleName: '',
       articleCategory: '',
       articleContent: '',
+      articlePreview: '',
     }
   },
-  setup() {
-    useHead({
-      titleTemplate: '%s : Добавление статьи',
-    })
+  computed: {
+    dataPage() {
+      return useStore().getDataArticle
+    },
+    listCategory() {
+      return useStore().getCategories
+    },
+    pageName() {
+      return this.dataPage.action === 'add' ? 'Добавление статьи' : 'Редактирование статьи'
+    },
+    buttonName() {
+      return this.dataPage.action === 'add' ? 'Добавить статью' : 'Изменить статью'
+    }
   },
   mounted() {
     if (this.dataPage.data.hasOwnProperty('id')) {
@@ -69,9 +96,18 @@ export default {
       this.articleContent = this.dataPage.data.content
       this.articleName = this.dataPage.data.name
       this.articleCategory = this.listCategory.find(item => item.id === this.dataPage.data.category).id
+      this.articlePreview = this.dataPage.data.preview
     }
   },
   methods: {
+    imageEdit() {
+      let file = this.$refs.image.files[0];
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.articlePreview = reader.result
+      }
+      reader.readAsDataURL(file);
+    },
     returnToBack() {
       this.$emit('currentComponent', 'adminArticles')
     },
@@ -86,6 +122,7 @@ export default {
         category: this.articleCategory,
         content: this.articleContent,
         status: this.articleStatus,
+        preview: this.articlePreview
       }
       useStore().actionArticle(this.dataPage.action, data)
       this.$emit('currentComponent', 'adminArticles')
@@ -96,7 +133,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -5,14 +5,13 @@
         class="modal-edit__close"
         @click="changeModalState"
       >
-        <v-icon icon="mdi-close" />
+        <v-icon icon="mdi-close"/>
       </span>
       <h1
-        :style="{textAlign: this.dataEdited.action === 'remove' ? 'center' : 'left'}"
+        :style="styleTitle"
         class="modal-edit__title"
-      >
-        {{ dataEdited.title }}
-      </h1>
+        v-text="dataEdited.title"
+      />
       <input
         v-if="dataEdited.action !== 'remove'"
         class="input"
@@ -22,7 +21,7 @@
       >
       <div class="modal-edit__buttons">
         <button class="button" @click.prevent="cancelChanges">
-          <span v-text="dataEdited.action === 'remove' ? 'Нет' : 'Отменить'" />
+          <span v-text="cancelButtonName"/>
         </button>
         <button
           v-if="dataEdited.action === 'remove'"
@@ -36,7 +35,7 @@
           class="button button-blue"
           @click.prevent="saveChanges"
         >
-          <span v-text="dataEdited.action === 'add' ? 'Добавить' : 'Сохранить'" />
+          <span v-text="addButtonName"/>
         </button>
       </div>
     </div>
@@ -59,6 +58,15 @@ export default {
     dataEdited() {
       this.name = useStore().getDataEditedModal.data.name
       return useStore().getDataEditedModal
+    },
+    addButtonName() {
+      return this.dataEdited.action === 'add' ? 'Добавить' : 'Сохранить'
+    },
+    cancelButtonName() {
+      return this.dataEdited.action === 'remove' ? 'Нет' : 'Отменить'
+    },
+    styleTitle() {
+      return {textAlign: this.dataEdited.action === 'remove' ? 'center' : 'left'}
     }
   },
   methods: {

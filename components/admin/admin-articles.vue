@@ -1,17 +1,21 @@
 <template>
   <div class="admin-view__inner">
-    <h2 class="admin-title">Статьи</h2>
+    <h2 class="admin-title" v-text="'Статьи'"/>
     <el-table :data="filterTableData" style="width: 100%">
       <el-table-column prop="name" label="Название"/>
       <el-table-column prop="category" label="Категория">
         <template #default="scope">
-          <span v-text="categoryName(scope.row.category)" />
+          <span v-text="categoryName(scope.row.category)"/>
         </template>
       </el-table-column>
       <el-table-column prop="date" label="Дата"/>
       <el-table-column prop="status" label="Опубликовано">
         <template #default="scope">
-          <input type="checkbox" class="checkbox" v-model="scope.row.status">
+          <input
+            type="checkbox"
+            class="checkbox"
+            v-model="scope.row.status"
+          >
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="Действия" width="250">
