@@ -1,13 +1,19 @@
-const decoderImage = (element) => {
-    let value
+
+async function decoderImage(element) {
+    let value = 0
     const file = element.files[0];
     const reader = new FileReader();
     console.log(reader)
-    reader.onloadend = () => {
-        value = reader.result
-    }
+
+    let promise = new Promise((resolve, reject) => {
+        reader.onload = () => {
+            resolve(reader.result)
+        }
+    });
+
     reader.readAsDataURL(file);
-    return value
-}
+    let result = await promise
+    return result
+} 
 
 export default decoderImage
