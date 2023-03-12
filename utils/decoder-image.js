@@ -1,13 +1,10 @@
-const decoderImage = (element) => {
-    let value
-    const file = element.files[0];
-    const reader = new FileReader();
-    console.log(reader)
+async function encodeImageFileAsURL(element) {
+    let file = element.files[0];
+    let reader = new FileReader();
     reader.onloadend = () => {
-        value = reader.result
+        return reader.result
     }
     reader.readAsDataURL(file);
-    return value
 }
 
-export default decoderImage
+export default encodeImageFileAsURL

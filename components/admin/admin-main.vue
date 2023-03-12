@@ -1,6 +1,6 @@
 <template>
   <div class="admin-view__inner">
-    <h2 class="admin-title">Главная</h2>
+    <h2 class="admin-title" v-text="'Главная'" />
     <div class="admin-item" v-for="item in siteSetting">
       <adminEdit
         :editItem="item"
@@ -13,6 +13,7 @@
 <script>
 import {useStore} from "~/store";
 import adminEdit from "~/components/admin/admin-edit.vue";
+
 export default {
   name: "admin-main",
   components: {
@@ -24,9 +25,7 @@ export default {
     })
   },
   data() {
-    return {
-
-    }
+    return {}
   },
   methods: {
     changedItem(value) {
@@ -40,7 +39,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>

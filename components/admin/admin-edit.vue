@@ -1,6 +1,6 @@
 <template>
   <div class="admin-item-edit">
-    <h3 class="admin-item-title" v-text="editItem[1].name" />
+    <h3 class="admin-item-title" v-text="editItem[1].name"/>
     <div class="admin-item-edit">
       <input
         class="input edit-input"
@@ -14,9 +14,8 @@
         v-show="showButtonCancel"
         class="edit-button edit-button--cancel"
         @click.prevent="cancelChange"
-      >
-        Отменить
-      </button>
+        v-text="'Отменить'"
+      />
     </div>
   </div>
 </template>
@@ -46,7 +45,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>

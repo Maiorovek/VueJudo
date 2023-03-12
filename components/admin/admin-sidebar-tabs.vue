@@ -7,7 +7,7 @@
         :class="{'item-active': item.component === selectComponent}"
         @click="selectView(item.component)"
       >
-        <v-icon :icon="item.icon" />
+        <v-icon :icon="item.icon"/>
         <span v-text="item.title"/>
       </div>
       <div
@@ -15,8 +15,8 @@
         class="tab-item__top"
         @click="openMiniList"
       >
-        <v-icon :icon="item.icon" />
-        <span v-text="item.title" />
+        <v-icon :icon="item.icon"/>
+        <span v-text="item.title"/>
         <v-icon
           class="arrow"
           :class="{'arrow-item': stateMiniList}"
@@ -33,8 +33,8 @@
           v-for="itemMini in item.list"
           @click="selectView(itemMini.component)"
         >
-          <v-icon :icon="itemMini.icon" />
-          <span v-text="itemMini.title" />
+          <v-icon :icon="itemMini.icon"/>
+          <span v-text="itemMini.title"/>
         </div>
       </div>
     </div>
@@ -67,7 +67,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>

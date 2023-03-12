@@ -1,23 +1,27 @@
 <template>
   <section class="news-section">
-    <input type="file" ref="myFiles" @change="decoder" multiple>
-    <img :src="image" alt="">
-    {{ image }}
+      <div class="title-section">
+
+      </div>
   </section>
 </template>
 
 <script>
-import decoderImage from "~/utils/decoder-image";
 export default {
   name: "news-section",
   data() {
     return {
-      image: '123123'
+      image: '123123',
     }
   },
   methods: {
-    decoder() {
-      console.log(decoderImage(this.$refs.myFiles))
+    Decoder() {
+      let file = this.$refs.myFiles.files[0];
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.image = reader.result
+      }
+      reader.readAsDataURL(file);
     }
   },
 }

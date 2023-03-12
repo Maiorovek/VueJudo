@@ -84,8 +84,22 @@
 
     .admin-view__inner {
 
+        & > * {
+            margin-bottom: 25px;
+        }
+
         .admin-add {
             margin-top: 20px;
+        }
+
+        .admin-flex {
+            display: flex;
+            align-items: center;
+            column-gap: 15px;
+        }
+
+        .admin-preview {
+            max-width: 200px;
         }
 
         .cell {
