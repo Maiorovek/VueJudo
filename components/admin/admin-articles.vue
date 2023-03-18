@@ -64,7 +64,7 @@ export default {
       this.$emit('currentComponent', 'actionsArticles')
     },
     categoryName(index) {
-      return this.categoryList.find(item => item.id === index).name
+      return this.categoryList.find(item => item.id === index)?.name
     },
   },
   computed: {

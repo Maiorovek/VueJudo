@@ -55,6 +55,8 @@
 <script>
 import Editor2 from "~/components/editor/Editor2.vue";
 import {useStore} from "~/store";
+import decoderImage from "~/utils/decoder-image";
+import transliter from "~/utils/translit";
 
 export default {
   name: "add-articles",
@@ -95,18 +97,13 @@ export default {
       this.articleStatus = this.dataPage.data.status
       this.articleContent = this.dataPage.data.content
       this.articleName = this.dataPage.data.name
-      this.articleCategory = this.listCategory.find(item => item.id === this.dataPage.data.category).id
+      this.articleCategory = this.listCategory.find(item => item.id === this.dataPage.data.category)?.id
       this.articlePreview = this.dataPage.data.preview
     }
   },
   methods: {
-    imageEdit() {
-      let file = this.$refs.image.files[0];
-      let reader = new FileReader();
-      reader.onloadend = () => {
-        this.articlePreview = reader.result
-      }
-      reader.readAsDataURL(file);
+    async imageEdit() {
+      this.articlePreview = await decoderImage(this.$refs.image)
     },
     returnToBack() {
       this.$emit('currentComponent', 'adminArticles')
@@ -119,6 +116,7 @@ export default {
       const data = {
         id: this.articleId,
         name: this.articleName,
+        page: transliter(this.articleName),
         category: this.articleCategory,
         content: this.articleContent,
         status: this.articleStatus,

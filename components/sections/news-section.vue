@@ -15,9 +15,7 @@ export default {
     }
   },
   methods: {
-    async decoder() {
-      console.log(await decoderImage(this.$refs.myFiles))
-    }
+
   },
 }
 </script>
