@@ -1,25 +1,34 @@
 <template>
-  <div class="auth__inner">
-    <div class="auth-title">
-      Авторизация
-    </div>
-    <button class="auth-button">Войти</button>
-  </div>
+    <form class="auth__inner">
+        <div class="auth-title">
+            Авторизация
+        </div>
+        <inputCustom
+          :placeholder="'Логин'"
+          :type="'text'"
+          :title="'логин'"
+        />
+        <inputCustom
+          :placeholder="'Пароль'"
+          :type="'password'"
+          :title="'пароль'"
+        />
+        <button @click.prevent="login" class="auth-button">Войти</button>
+    </form>
 </template>
 
-<script>
-
+<script setup>
 import {useStore} from "~/store";
 
-export default {
-  setup() {
-    const siteInfo = computed(() => useStore().getSiteSetting)
-    definePageMeta({
-      layout: "auth",
-    });
-    useHead({
-      title: `${siteInfo.value.name.param} : Авторизация`,
-    })
-  },
+const login = () => {
+    console.log(123)
 }
+
+const siteInfo = computed(() => useStore().getSiteSetting)
+definePageMeta({
+    layout: "auth",
+});
+useHead({
+    title: `${siteInfo.value.name.param} : Авторизация`,
+})
 </script>

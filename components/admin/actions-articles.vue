@@ -18,7 +18,7 @@
     </v-checkbox>
     <div class="admin-flex">
       <span>Категория: </span>
-      <el-select v-model="articleCategory" class="m-2" placeholder="Select">
+      <el-select v-model="articleCategory" class="m-2" placeholder="Выберите категорию">
         <el-option
           v-for="item in listCategory"
           :key="item.id"

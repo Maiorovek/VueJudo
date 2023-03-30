@@ -1,0 +1,38 @@
+<template>
+    <label class="custom-input">
+        <input :type="typeInput" placeholder="&nbsp;" v-model="input"/>
+        <span class="placeholder" v-text="props.placeholder"/>
+        <span v-if="props.type === 'password'" class="input-eye" @click="showPassword">
+            <img v-if="password" src="~assets/icons/eye-off.svg" alt=""/>
+            <img v-else src="~assets/icons/eye.svg" alt=""/>
+        </span>
+    </label>
+</template>
+
+<script setup>
+const props = defineProps({
+    placeholder: {
+        type: String,
+        required: true,
+    },
+    type: {
+        type: String,
+        default: 'text',
+    },
+    title: {
+        type: String,
+        default: 'Это поле',
+    },
+})
+
+const password = ref(true)
+const input = ref('')
+
+const showPassword = () => {
+    password.value = !password.value
+}
+const typeInput = computed(() => {
+    return props.type === 'text' ? 'text' : password.value ? 'password' : 'text'
+})
+
+</script>

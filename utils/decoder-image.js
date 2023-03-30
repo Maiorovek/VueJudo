@@ -7,7 +7,6 @@ async function decoderImage(element) {
         }
     });
     reader.readAsDataURL(file);
-    const result = await promise
-    return result 
-} 
+    return await promise
+}
 export default decoderImage

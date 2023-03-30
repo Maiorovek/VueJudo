@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.3",
+    "@nuxtjs/svg": "^0.4.0",
     "nuxt": "^3.2.0"
   },
   "dependencies": {
@@ -24,9 +25,11 @@
     "devextreme": "22.2.4",
     "devextreme-vue": "22.2.4",
     "element-plus": "^2.2.33",
+    "file-loader": "^6.2.0",
     "path": "^0.12.7",
     "pinia": "^2.0.30",
     "postcss": "^8.4.21",
+    "raw-loader": "^4.0.2",
     "remixicon": "^2.5.0",
     "sass": "^1.58.3",
     "sass-loader": "^13.2.0",

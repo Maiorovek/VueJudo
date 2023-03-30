@@ -1,5 +1,7 @@
 export default defineNuxtConfig({
 
+    generate: { fallback: true },
+
     head: {
         link: [
             { rel: 'icon', type: 'image/x-icon', href: 'public/favicon.png' }
@@ -17,6 +19,8 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@element-plus/nuxt',
     ],
+
+    buildModules: ["@nuxtjs/svg"],
 
     build: {
         transpile: ['vuetify'],

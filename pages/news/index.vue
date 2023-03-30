@@ -5,10 +5,10 @@
       <div class="page__filter">
         <label>
           <input class="input" type="text" placeholder="Найти новость..." v-model="searchNews">
-          <v-icon v-if="showClearInput" icon="mdi-close" @click="clearSearchInput" />
+          <v-icon v-if="showClearInput" icon="mdi-close" @click="clearSearchInput"/>
         </label>
       </div>
-      <div class="news__list">
+      <div class="news__list" v-if="filteredListNews.length > 0">
         <nuxt-link
           v-for="news in filteredListNews"
           :to="`/news/${news.id}`"
@@ -25,6 +25,12 @@
           </div>
         </nuxt-link>
       </div>
+      <div
+        v-else
+        class="news__nothing"
+      >
+        Ничего не найдено
+      </div>
     </div>
   </section>
 </template>
@@ -32,6 +38,7 @@
 <script>
 import {useStore} from "~/store";
 import VSelect from "~/components/v-select.vue";
+import debounce from "~/utils/debounce";
 
 export default {
   name: 'news',
@@ -60,7 +67,7 @@ export default {
     },
     filteredListNews() {
       return this.listNews.filter(news => {
-        return news.name.toLowerCase().includes(this.searchNews.toLowerCase())
+        return news.name.toLowerCase().includes(this.searchNews.toLowerCase()) && news.status
       })
     }
   },

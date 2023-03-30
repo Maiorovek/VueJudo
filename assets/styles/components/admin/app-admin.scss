@@ -131,7 +131,10 @@
 
             &-edit {
 
-                .admin-item-edit {
+                .item {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 15px;
 
                     .edit-input {
                         margin-right: 20px;
