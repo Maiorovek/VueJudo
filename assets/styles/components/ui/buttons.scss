@@ -1,11 +1,12 @@
 .button {
-    padding: 12px 36px;
-    border-radius: 12px;
+    padding: 6px 12px;
+    border-radius: 4px;
     border: 1px solid #003882;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     background: transparent;
     transition: background .2s linear;
+    white-space: nowrap;
 
     span {
         color: #003882;
@@ -22,41 +23,61 @@
         }
     }
 
-    &.button-blue {
+    &.large {
+        padding: 12px 36px;
+
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    &.blue {
         background: #003882;
 
         span {
             color: #ffff;
-            transition: color .2s linear;
         }
 
         &:hover {
             background: transparent;
-            transition: background .2s linear;
 
             span {
                 color: #003882;
-                transition: color .2s linear;
             }
         }
     }
 
-    &.button-red {
+    &.red {
         background: #f56c6c;
         border: 1px solid #f56c6c;
 
         span {
             color: #ffff;
-            transition: color .2s linear;
         }
 
         &:hover {
             background: transparent;
-            transition: background .2s linear;
 
             span {
                 color: #f56c6c;
-                transition: color .2s linear;
+            }
+        }
+    }
+
+    &.green {
+        background: #95d475;
+        border: 1px solid #95d475;
+
+        span {
+            color: #ffff;
+        }
+
+        &:hover {
+            background: transparent;
+
+            span {
+                color: #95d475;
             }
         }
     }

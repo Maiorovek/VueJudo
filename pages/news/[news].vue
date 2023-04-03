@@ -1,25 +1,24 @@
 <template>
-  <section class="news-page">
-    <div class="wrapper">
-      <div v-if="news === undefined">загрузка</div>
-      <div v-html="news.content"></div>
-    </div>
-  </section>
+    <section class="news-page">
+        <div class="wrapper">
+            <div v-if="news === undefined">загрузка</div>
+            <div v-html="news.content"></div>
+        </div>
+    </section>
 </template>
 
 <script>
-import {useStore} from "~/store";
-export default {
-  data() {
-    return {
-      news: {},
-    }
-  },
-  computed: {
+import { useStore } from "~/store";
 
-  },
-  mounted() {
-    this.news = useStore().getArticle(this.$route.params.news)
-  },
+export default {
+   data() {
+      return {
+         news: {},
+      }
+   },
+   computed: {},
+   mounted() {
+      this.news = useStore().getArticle(this.$route.params.news)
+   },
 }
 </script>

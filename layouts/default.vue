@@ -9,9 +9,14 @@
 
 <script setup>
 import AppHeader from "~/components/header/AppHeader.vue";
-import AppFooter from "~/components/AppFooter.vue";
+import AppFooter from "~/components/footer/AppFooter.vue";
 import EditedModal from "~/components/EditedModal.vue";
 import {useStore} from "~/store";
+
+onMounted(()=> {
+    useStore().fetchArticleCategories()
+    useStore().fetchArticlesList()
+})
 const siteInfo = computed(() => useStore().getSiteSetting)
 
 useHead({

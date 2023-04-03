@@ -13,6 +13,29 @@
     --field-padding: 12px;
     width: 100%;
 
+    &.error {
+        input {
+            border-color: red;
+            color: red;
+        }
+
+        input.dirty,
+        input:not(:placeholder-shown),
+        input:focus {
+            border-color: red;
+        }
+
+        .placeholder {
+            color: red;
+        }
+
+        input.dirty + .placeholder,
+        input:not(:placeholder-shown) + .placeholder,
+        input:focus + .placeholder {
+            color: red;
+        }
+    }
+
     .input-eye {
         position: absolute;
         right: 10px;
