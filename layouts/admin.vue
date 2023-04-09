@@ -17,6 +17,7 @@ export default {
    mounted() {
       useStore().fetchArticleCategories()
       useStore().fetchArticlesList()
+      useStore().fetchEventsList()
    },
 }
 </script>

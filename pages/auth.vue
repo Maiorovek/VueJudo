@@ -8,19 +8,20 @@
           :type="'text'"
           :title="'логин'"
           :name="'login'"
-          :error="false"
+          :isError="errorString.value === 'auth/invalid-email'"
           v-model:modelValue="loginValue"
+          :error="errorString.value"
         />
         <inputCustom
           :placeholder="'Пароль'"
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
-          :error="false"
+          :isError="errorString.value === 'auth/missing-password'"
+          :error="errorString.value"
           v-model:modelValue="passwordValue"
         />
         <button @click.prevent="login" class="auth-button">Войти</button>
-        <button @click.prevent="logout" class="auth-button">Выйти</button>
     </form>
 </template>
 
@@ -28,21 +29,40 @@
 import { useStore } from "~/store";
 import InputCustom from "~/components/ui/input-custom.vue";
 import loginAuth from "~/server/login";
-import logoutAuth from "~/server/logout";
 
 const loginValue = ref('')
 const passwordValue = ref('')
 const data = ref([])
+const errorString = ref('')
 
 const login = () => loginAuth(loginValue.value, passwordValue.value)
+const resetError = () => {
+    errorString.value = ''
+    useStore().setErrorAuth('')
+}
+const errorAuth = computed(() => useStore().getErrorAuth)
 
-const logout = () => logoutAuth
+watchEffect( () => {
+    errorString.value = errorAuth
+})
 
-const siteInfo = computed(() => useStore().getSiteSetting)
+watch(() => loginValue.value, (prev, next) => {
+    if (next !== prev) {
+        resetError()
+    }
+});
+
+watch(() => passwordValue.value, (prev, next) => {
+    if (next !== prev) {
+        resetError()
+    }
+});
+
+
 definePageMeta({
    layout: "auth",
 });
 useHead({
-   title: `${siteInfo.value.name.param} : Авторизация`,
+   title: `Авторизация`,
 })
 </script>

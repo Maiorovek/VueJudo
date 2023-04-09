@@ -37,15 +37,23 @@
         <Editor2 :content="articleContent" @valueEditor="valueEditor"/>
         <div class="admin-buttons__wrapper">
             <el-button
+              v-if="this.dataPage.action === 'add'"
               class="admin-add"
               type="success"
-              @click="actionItem"
-              v-text="buttonName"
+              @click="addItem()"
+              v-text="'Добавить статью'"
+            />
+            <el-button
+              v-else
+              class="admin-add"
+              type="success"
+              @click="changeItem()"
+              v-text="'Изменить статью'"
             />
             <el-button
               class="admin-add"
               type="danger"
-              @click="cancel"
+              @click="cancel()"
               v-text="'Отменить'"
             />
         </div>
@@ -87,9 +95,19 @@ export default {
       pageName() {
          return this.dataPage.action === 'add' ? 'Добавление статьи' : 'Редактирование статьи'
       },
-      buttonName() {
-         return this.dataPage.action === 'add' ? 'Добавить статью' : 'Изменить статью'
-      }
+      createObject() {
+         return {
+            id: this.articleId,
+            date: this.dataPage.data.date,
+            name: this.articleName,
+            page: transliter(this.articleName),
+            category: this.articleCategory,
+            content: this.articleContent,
+            status: this.articleStatus,
+            preview: this.articlePreview,
+            indexDB: this.dataPage.data.indexDB
+         }
+      },
    },
    mounted() {
       if (this.dataPage.data.hasOwnProperty('id')) {
@@ -112,19 +130,15 @@ export default {
          this.returnToBack()
          this.stateEditor = !this.stateEditor
       },
-      actionItem() {
-         const data = {
-            id: this.articleId,
-            name: this.articleName,
-            page: transliter(this.articleName),
-            category: this.articleCategory,
-            content: this.articleContent,
-            status: this.articleStatus,
-            preview: this.articlePreview,
-            indexDB: this.dataPage.data.indexDB
-         }
-         useStore().actionArticle(this.dataPage.action, data)
-         this.$emit('currentComponent', 'adminArticles')
+      changeItem() {
+         const data = {...this.createObject}
+         useStore().saveChange(data, this.articleId, 'articles', this.dataPage.data.indexDB, 'articles-list')
+         this.returnToBack()
+      },
+      addItem() {
+         const data = {...this.createObject}
+         useStore().addItem(data, 'articles', 'articles-list')
+         this.returnToBack()
       },
       valueEditor(value) {
          this.articleContent = value

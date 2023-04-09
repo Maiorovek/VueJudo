@@ -82,6 +82,16 @@
         cursor: text;
     }
 
+    .span-error {
+        position: absolute;
+        right: 8px;
+        padding: 0 5px;
+        bottom: 0;
+        color: red;
+        background: #fff;
+        transform: translateY(50%) ;
+    }
+
     input + .placeholder {
         left: 8px;
         padding: 0 5px;

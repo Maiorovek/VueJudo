@@ -21,7 +21,7 @@
             >
             <div class="modal-edit__buttons">
                 <vButton
-                  @click.prevent="cancelChanges"
+                  @click.prevent="cancelAction"
                   :text="cancelButtonName"
                   class="large"
                 />
@@ -32,10 +32,16 @@
                   :text="'Да'"
                 />
                 <vButton
-                  v-else
+                  v-if="dataEdited.action === 'change'"
                   class="blue large"
                   @click.prevent="saveChanges"
-                  :text="addButtonName"
+                  :text="'Сохранить'"
+                />
+                <vButton
+                  v-if="dataEdited.action === 'add'"
+                  class="blue large"
+                  @click.prevent="addItem"
+                  :text="'Добавить'"
                 />
             </div>
         </div>
@@ -63,9 +69,6 @@ export default {
          this.name = useStore().getDataEditedModal.data.name
          return useStore().getDataEditedModal
       },
-      addButtonName() {
-         return this.dataEdited.action === 'add' ? 'Добавить' : 'Сохранить'
-      },
       cancelButtonName() {
          return this.dataEdited.action === 'remove' ? 'Нет' : 'Отменить'
       },
@@ -77,16 +80,36 @@ export default {
       changeModalState() {
          useStore().changeModalState()
       },
-      cancelChanges() {
+      cancelAction() {
          this.changeModalState()
          this.name = ''
       },
       saveChanges() {
-         useStore().changeData(this.name, this.dataEdited.data.id, this.dataEdited.type, this.dataEdited.action, this.dataEdited.data.indexDB)
+         const newData = {
+            ...this.dataEdited.data,
+            id: this.dataEdited.data.id,
+            name: this.name
+         }
+         useStore().saveChange(newData, this.dataEdited.data.id, this.dataEdited.type, this.dataEdited.data.indexDB, this.dataEdited.path)
          this.changeModalState()
       },
       removeItem() {
-         useStore().removeItem(this.dataEdited.data, this.dataEdited.type)
+         useStore().removeItem(this.dataEdited.data, this.dataEdited.type, this.dataEdited.path)
+         this.changeModalState()
+
+         if (this.dataEdited.type === 'events') {
+            this.dataEdited.event.remove()
+         }
+      },
+      addItem() {
+         const newData = this.dataEdited.type === 'categories'
+            ? this.name
+            : {
+               ...this.dataEdited.data,
+               title: this.name,
+            }
+
+         useStore().addItem(newData, this.dataEdited.type, this.dataEdited.path)
          this.changeModalState()
       },
    },

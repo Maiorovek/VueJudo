@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { database } from "~/server/setting";
 import deleteDocument from "~/server/deleteDocument";
 import createDocument from "~/server/createDocument";
 import updateDocument from "~/server/updateDocument";
+import createObject from "~/utils/createObject";
 
 export const useStore = defineStore('store', {
    state: () => ({
+      adminSidebarIsOpen: true,
       editedModalState: false,
       editedModalData: {
          title: '',
@@ -25,6 +27,16 @@ export const useStore = defineStore('store', {
             id: 1,
             title: 'Новости',
             link: '/news',
+         },
+         {
+            id: 2,
+            title: 'События',
+            link: '/events',
+         },
+         {
+            id: 3,
+            title: 'Наши друзья',
+            link: '/friends',
          },
       ],
       listAdminSidebar: [
@@ -56,27 +68,35 @@ export const useStore = defineStore('store', {
          },
          {
             id: 2,
+            title: 'События',
+            component: 'adminEvents',
+            icon: 'mdi-calendar-multiple',
+         },
+         {
+            id: 3,
             title: 'Страницы',
             component: 'adminPages',
             list: null,
             icon: 'mdi-page-layout-body',
          }
       ],
-      articles: [],
       dataArticle: {
          data: {},
          action: '',
       },
-      stateDownloadArticles: true,
-      categories: [],
       siteSetting: {
          name: {
             name: 'Название сайта',
             param: 'Дзюдо',
          },
       },
+      errorAuth: '',
+      articles: [],
+      categories: [],
+      events: [],
    }),
    getters: {
+      getStateAdminSidebar: state => state.adminSidebarIsOpen,
       getSiteSetting: state => state.siteSetting,
       getListAdminSidebar: state => state.listAdminSidebar,
       getMenuList: state => state.menuList,
@@ -85,113 +105,109 @@ export const useStore = defineStore('store', {
       getCategories: state => state.categories,
       getArticles: state => state.articles,
       getStateDownloadArticles: state => state.stateDownloadArticles,
+      getErrorAuth: state => state.errorAuth,
       getArticle: (state) => index => {
          return state.articles.find(news => news.id === Number(index))
       },
       getDataArticle: state => state.dataArticle,
+      getEvents: state => state.events,
    },
    actions: {
+      changeAdminSidebarState() {
+        this.adminSidebarIsOpen = !this.adminSidebarIsOpen
+      },
+      setErrorAuth(stringError) {
+         this.errorAuth = stringError
+      },
       changeModalState() {
          this.editedModalState = !this.editedModalState
       },
-      changeModalData(information, type, action, title = 'Изменить категорию') {
-         let data = {}
-         if (action === 'change') {
-            data = this[type].find(item => item.id === information.id)
-         } else if (action === 'remove') {
-            data = {...information}
-         }
+      changeModalData(information, type, action, title = 'Изменить категорию', path, event) {
+         const data = action === 'change'
+            ? this[type].find(item => item.id === information.id)
+            : {...information}
          this.editedModalData = {
+            path,
             type,
             action,
             title,
-            data: {...data}
+            data: {...data},
+            event,
          }
          this.changeModalState()
       },
-      async changeData(data, index, type, action, indexDB) {
-         if (action === 'change') {
-            this[type] = this[type].map(item => {
-               if (item.id === index) {
-                  item.name = data
-               }
-               return item
-            })
-            await updateDocument('article-categories', data, indexDB, type)
-         } else if (action === 'add') {
-            const lastIndex = this[type].at(-1) ? this[type].at(-1).id + 1 : 1
-            const newItem = {
-               id: lastIndex,
-               name: data
-            }
-            this[type].push(newItem)
-            await createDocument('article-categories', lastIndex, data, type)
-         }
-      },
-      async removeItem(data, type) {
-         this[type] = this[type].filter(item => item.id !== data.id)
-         if (type === 'categories') {
-            await deleteDocument('article-categories', data.indexDB)
-         } else {
-            await deleteDocument('articles-list', data.indexDB)
-         }
-      },
-      changeDataArticle(information = null, action = 'add') {
-         const data = information === null ? {} : this.articles.find(item => item.id === information.id)
+      saveChangeArticle(information = null, action = 'add') {
+         const data = information === null
+            ? {}
+            : this.articles.find(item => item.id === information.id)
          this.dataArticle = {
             data,
             action,
          }
       },
-      async actionArticle(action, data) {
-         if (action === 'add') {
-            const lastIndex = this.articles.at(-1) ? this.articles.at(-1).id + 1 : 1
-            let options = {
-               year: 'numeric',
-               month: 'numeric',
-               day: 'numeric',
-               timezone: 'UTC'
-            };
-            this.articles.push({
-               ...data,
-               id: lastIndex,
-               date: new Date().toLocaleString('ru', options)
-            })
-            await createDocument('articles-list', lastIndex, data, 'articles', options)
-         } else {
-            const {name, page, content, status, category, preview} = data
-            this.articles = this.articles.map(item => {
-               if (item.id === data.id) {
-                  item.name = name
-                  item.page = page
-                  item.content = content
-                  item.category = category
-                  item.status = status
-                  item.preview = preview
-               }
-               return item
-            })
-            await updateDocument('article-categories', data, data.indexDB, 'articles')
-         }
+      async saveChange(data, index, type, indexDB, path) {
+         const newData = createObject(null, data, type)
+         this[type] = this[type].map(item => {
+            if (item.id === index) {
+               return {...newData}
+            }
+            return item
+         })
+         await updateDocument(path, newData, indexDB, type)
+      },
+      async addItem(data, type, path) {
+         const lastIndex = this[type].at(-1) ? this[type].at(-1).id + 1 : 1
+         const newDate = createObject(lastIndex, data, type)
+         await createDocument(path, newDate)
+      },
+      async removeItem(data, type, path) {
+         this[type] = this[type].filter(item => item.id !== data.id)
+         await deleteDocument(path, data.indexDB)
       },
       async fetchArticleCategories() {
-         const querySnapshot = await getDocs(collection(database, 'article-categories'));
-         querySnapshot.forEach((doc) => {
-            this.categories.push({
-               ...doc.data(),
-               indexDB: doc.id,
-            })
+         onSnapshot(collection(database, 'article-categories'), querySnapshot => {
+            querySnapshot.forEach((doc) => {
+               if (this.categories.filter(item => item.id === doc.data().id).length < 1) {
+                  this.categories.push({
+                     ...doc.data(),
+                     indexDB: doc.id,
+                  })
+               }
+            });
+         });
+         this.categories.sort((prev, next) => {
+            return prev.id - next.id
          });
       },
       async fetchArticlesList() {
-         const querySnapshot = await getDocs(collection(database, 'articles-list'));
-         querySnapshot.forEach((doc) => {
-            this.articles.push({
-               ...doc.data(),
-               indexDB: doc.id,
-            })
+         onSnapshot(collection(database, 'articles-list'), querySnapshot => {
+            querySnapshot.forEach((doc) => {
+               if (this.articles.filter(item => item.id === doc.data().id).length < 1) {
+                  this.articles.push({
+                     ...doc.data(),
+                     indexDB: doc.id,
+                  })
+               }
+            });
          });
-         this.stateDownloadArticles = false
+         this.articles.sort((prev, next) => {
+            return prev.id - next.id
+         });
+      },
+      async fetchEventsList() {
+         onSnapshot(collection(database, 'events-list'), querySnapshot => {
+            querySnapshot.forEach((doc) => {
+               if (this.events.filter(item => item.id === doc.data().id).length < 1) {
+                  this.events.push({
+                     ...doc.data(),
+                     indexDB: doc.id,
+                  })
+               }
+            });
+         });
+         this.events.sort((prev, next) => {
+            return prev.id - next.id
+         });
       },
    },
 })

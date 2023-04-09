@@ -1,7 +1,7 @@
 <template>
-    <div class="admin-sidebar">
-        <div class="admin-sidebar__user">
-            Admin Adminov
+    <div class="admin-sidebar" :class="{'active-sidebar': sidebarIsOpen}">
+        <div class="admin-sidebar__button" @click="hideSidebar">
+            <img src="../../assets/icons/double-arrow.svg" alt=""/>
         </div>
         <div class="admin-sidebar__title">
             Администратор
@@ -14,7 +14,7 @@
             <v-icon icon="mdi-sitemap-outline"/>
             <span v-text="'Открыть сайт'"/>
         </nuxt-link>
-        <div class="tab-item__top">
+        <div class="tab-item__top" @click="logoutUser">
             <v-icon icon="mdi-logout"/>
             <span v-text="'Выйти'"/>
         </div>
@@ -23,6 +23,8 @@
 
 <script>
 import adminSidebarTabs from "~/components/admin/admin-sidebar-tabs.vue";
+import logout from "~/server/logout";
+import { useStore } from "~/store";
 
 export default {
    name: "admin-sidebar",
@@ -30,11 +32,20 @@ export default {
       adminSidebarTabs
    },
    data() {
-      return {}
+      return {
+          sidebarIsOpen: true,
+      }
    },
    methods: {
+      async logoutUser() {
+         logout()
+      },
       currentComponent(component) {
          this.$emit('currentComponent', shallowRef(component))
+      },
+      hideSidebar() {
+          useStore().changeAdminSidebarState()
+          this.sidebarIsOpen = !this.sidebarIsOpen
       }
    },
 }

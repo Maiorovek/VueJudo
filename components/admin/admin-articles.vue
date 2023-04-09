@@ -49,14 +49,14 @@ export default {
    },
    methods: {
       removeItem(data) {
-         useStore().changeModalData(data, 'articles', 'remove', 'Удалить статью?')
+         useStore().changeModalData(data, 'articles', 'remove', 'Удалить статью?', 'articles-list')
       },
       changeArticle(data) {
-         useStore().changeDataArticle(data, 'change')
+         useStore().saveChangeArticle(data, 'change')
          this.$emit('currentComponent', 'actionsArticles')
       },
       addArticle() {
-         useStore().changeDataArticle(null, 'add')
+         useStore().saveChangeArticle(null, 'add')
          this.$emit('currentComponent', 'actionsArticles')
       },
       categoryName(index) {

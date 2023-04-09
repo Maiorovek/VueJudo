@@ -3,9 +3,7 @@
         <div class="wrapper">
             <div class="header-section__inner">
                 <div class="header-section__logo">
-                    <img
-                      src="https://judoforpeace.net/WebRoot/vilkasfi02/Shops/2017042517/MediaGallery/International-Judo-Federation-IJF-logo.png"
-                      alt="logo">
+
                 </div>
                 <AppHeaderList/>
             </div>

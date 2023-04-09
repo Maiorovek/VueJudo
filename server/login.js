@@ -1,15 +1,15 @@
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useStore } from "~/store";
+
 const loginAuth = (email, password) => {
    const auth = getAuth();
    // 'admin@admin.com', 'AdminAdminov'
-   signInWithEmailAndPassword(auth, 'admin@admin.com', 'AdminAdminov')
-      .then((userCredential) => {
-         const user = userCredential.user;
-         console.log('Удачно')
+   signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+         window.location.href = '/admin'
       })
       .catch(error => {
-         const errorMessage = error.message;
-         console.error(errorMessage)
+         useStore().setErrorAuth(error.code)
       });
 }
 

@@ -1,5 +1,7 @@
 export default defineNuxtConfig({
 
+   ssr: false,
+
    generate: {fallback: true},
 
    head: {
@@ -9,7 +11,7 @@ export default defineNuxtConfig({
             type: 'image/x-icon',
             href: 'public/favicon.png'
          }
-      ]
+      ],
    },
 
    css: [
@@ -25,8 +27,7 @@ export default defineNuxtConfig({
    ],
 
    buildModules: [
-      "@nuxtjs/svg",
-      '@nuxtjs/auth-next'
+      '@nuxtjs/svg'
    ],
 
    build: {

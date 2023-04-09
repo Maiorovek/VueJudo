@@ -47,13 +47,13 @@ export default {
    },
    methods: {
       editItem(data) {
-         useStore().changeModalData(data, 'categories', 'change')
+         useStore().changeModalData(data, 'categories', 'change', null, 'article-categories')
       },
       removeItem(data) {
-         useStore().changeModalData(data, 'categories', 'remove', 'Удалить категорию?')
+         useStore().changeModalData(data, 'categories', 'remove', 'Удалить категорию?', 'article-categories')
       },
       addCategory() {
-         useStore().changeModalData(null, 'categories', 'add', 'Добавить категорию?')
+         useStore().changeModalData(null, 'categories', 'add', 'Добавить категорию?', 'article-categories')
       },
    }
 }

@@ -4,6 +4,23 @@
     width: 100vw;
     height: 100vh;
 
+    .auth-back {
+        display: inline-block;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: #fff;
+        text-decoration: unset;
+        color: #000;
+        margin-top: 40px;
+        box-shadow: none;
+        transition: box-shadow .2s linear;
+
+        &:hover {
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            transition: box-shadow .2s linear;
+        }
+    }
+
     &__inner {
         position: absolute;
         left: 50%;
