@@ -33,7 +33,7 @@ export default {
    },
    data() {
       return {
-          sidebarIsOpen: true,
+         sidebarIsOpen: true,
       }
    },
    methods: {
@@ -44,8 +44,8 @@ export default {
          this.$emit('currentComponent', shallowRef(component))
       },
       hideSidebar() {
-          useStore().changeAdminSidebarState()
-          this.sidebarIsOpen = !this.sidebarIsOpen
+         useStore().changeAdminSidebarState()
+         this.sidebarIsOpen = !this.sidebarIsOpen
       }
    },
 }
