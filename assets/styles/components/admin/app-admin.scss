@@ -3,12 +3,52 @@
     align-items: flex-start;
 
     .admin-sidebar {
+        position: relative;
         display: flex;
         flex-direction: column;
         width: 400px;
         height: 100vh;
         background: #1A2226;
         color: #ffffff;
+        margin-left: -400px;
+        transition: margin-left .4s linear;
+        padding-top: 10px;
+
+        &.active-sidebar {
+            margin-left: 0;
+            transition: margin-left .2s linear, box-shadow .2s linear, right .2s linear, transform .2s linear;
+
+
+            .admin-sidebar__button {
+                transform: rotate(180deg);
+                right: 10px;
+                transition: margin-left .2s linear, box-shadow .2s linear, right .2s linear, transform .2s linear;
+
+                &:hover {
+                    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+                }
+            }
+        }
+
+        &__button {
+            position: absolute;
+            padding: 10px;
+            right: -48px;
+            bottom: 10px;
+            background: #1A2226;
+            width: 44px;
+            height: 44px;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            box-shadow: none;
+            transition: margin-left .2s linear, box-shadow .2s linear, right .2s linear, transform .2s linear;
+
+            &:hover {
+                cursor: pointer;
+                box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                transition: margin-left .2s linear, box-shadow .2s linear, right .2s linear, transform .2s linear;
+            }
+        }
 
         &__user {
             color: #ffffff;
@@ -78,18 +118,20 @@
         width: 100%;
         height: 100vh;
         max-height: 100%;
-        padding: 20px;
+        padding: 20px 20px 20px 20px;
         overflow: auto;
+        transition: padding .2s linear;
+
+        &.morePad {
+            padding: 20px 60px 20px 60px;
+            transition: padding .2s linear;
+        }
     }
 
     .admin-view__inner {
 
         & > * {
             margin-bottom: 25px;
-        }
-
-        .admin-add {
-            margin-top: 20px;
         }
 
         .admin-flex {
@@ -131,7 +173,10 @@
 
             &-edit {
 
-                .admin-item-edit {
+                .item {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 15px;
 
                     .edit-input {
                         margin-right: 20px;

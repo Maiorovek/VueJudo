@@ -30,7 +30,12 @@
     .news__list {
         display: flex;
         align-items: stretch;
+        flex-wrap: wrap;
         gap: 20px;
+    }
+
+    .news__nothing {
+        margin-top: 20px;
     }
 
     .news-item {

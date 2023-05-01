@@ -1,13 +1,15 @@
 <template>
-  <section class="footer-section">
     <div class="wrapper">
-      <h1>Footer</h1>
+        <h1>friends</h1>
     </div>
-  </section>
 </template>
 
 <script>
 export default {
-  name: "AppFooter"
+   name: "friends"
 }
 </script>
+
+<style scoped>
+
+</style>
