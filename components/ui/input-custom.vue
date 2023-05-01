@@ -1,5 +1,6 @@
 <template>
     <label :class="{'error': props.isError}" class="custom-input">
+        {{props.error}}
         <input
           :type="typeInput"
           placeholder="&nbsp;"
@@ -69,7 +70,6 @@ const errorText = computed(() => {
    }
 
    return text
-
 })
 
 </script>
