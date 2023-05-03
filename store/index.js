@@ -40,12 +40,12 @@ export const useStore = defineStore('store', {
          },
       ],
       listAdminSidebar: [
-         {
-            id: 0,
-            title: 'Сайт',
-            component: 'adminMain',
-            icon: 'mdi-home',
-         },
+         // {
+         //    id: 0,
+         //    title: 'Сайт',
+         //    component: 'adminMain',
+         //    icon: 'mdi-home',
+         // },
          {
             id: 1,
             title: 'Новости',
@@ -72,12 +72,19 @@ export const useStore = defineStore('store', {
             component: 'adminEvents',
             icon: 'mdi-calendar-multiple',
          },
+         // {
+         //    id: 3,
+         //    title: 'Страницы',
+         //    component: 'adminPages',
+         //    list: null,
+         //    icon: 'mdi-page-layout-body',
+         // },
          {
-            id: 3,
-            title: 'Страницы',
-            component: 'adminPages',
+            id: 4,
+            title: 'Друзья',
+            component: 'adminFriends',
             list: null,
-            icon: 'mdi-page-layout-body',
+            icon: 'mdi-domain',
          }
       ],
       dataArticle: {
@@ -94,6 +101,7 @@ export const useStore = defineStore('store', {
       articles: [],
       categories: [],
       events: [],
+
    }),
    getters: {
       getStateAdminSidebar: state => state.adminSidebarIsOpen,
