@@ -10,6 +10,7 @@ const loginAuth = (email, password) => {
       })
       .catch(error => {
          useStore().setErrorAuth(error.code)
+         // console.log(error)
       });
 }
 

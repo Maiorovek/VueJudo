@@ -8,19 +8,18 @@
           :type="'text'"
           :title="'логин'"
           :name="'login'"
-          :isError="errorString.value === 'auth/invalid-email' || errorString.type === 'login'"
+          :isError="errorString.value === 'Это поле обязательно для заполнения'"
           v-model:modelValue="loginValue"
-          :error="errorString.value"
+          :error="errorString"
         />
-        {{errorString.type === 'login'}}
-        {{errorString.type === 'password'}}
+        {{ errorString }}
         <inputCustom
           :placeholder="'Пароль'"
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
-          :isError="errorString.value === 'auth/missing-password' || errorString.type === 'password'"
-          :error="errorString.value"
+          :isError="errorString.value === 'auth/missing-password'" 
+          :error="errorString"
           v-model:modelValue="passwordValue"
         />
         <button @click.prevent="login" class="auth-button">Войти</button>
@@ -41,8 +40,9 @@ const login = () => {
     if (validateInput('login', loginValue.value) && validateInput('password', passwordValue.value)) {
         loginAuth(loginValue.value, passwordValue.value)
     }
-    console.log(errorString)
+    // console.log(errorString.value)
 }
+
 const resetError = () => {
     errorString.value = ''
     errorString.type = ''
@@ -74,16 +74,16 @@ const validateInput = (inputType, inputValue) => {
         if (!emailRegex.test(inputValue)) {
             errorString.type = 'login'
             errorString.value = "Введите действительный адрес электронной почты";
+            return false
         }
-        return false
     }
 
     if (inputType === "password") {
         if (inputValue.length < 8) {
             errorString.type = 'login'
             errorString.value = "Пароль должен содержать не менее 8 символов";
+            return false
         }
-        return false
     }
 
     return true
