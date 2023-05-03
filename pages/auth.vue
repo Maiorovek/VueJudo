@@ -8,17 +8,17 @@
           :type="'text'"
           :title="'логин'"
           :name="'login'"
-          :isError="errorString.value === 'Это поле обязательно для заполнения'"
+          :isError="errorString.value === 'auth/user-not-found' || errorString === 'auth/invalid-email' || errorString === 'Это поле обязательно для заполения' || errorString === 'Введите действительный адрес электронной почты'"
           v-model:modelValue="loginValue"
           :error="errorString"
         />
-        {{ errorString }}
+        <!-- {{ errorString.value }} -->
         <inputCustom
           :placeholder="'Пароль'"
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
-          :isError="errorString.value === 'auth/missing-password'" 
+          :isError="errorString === 'auth/missing-password' || errorString === 'Это поле обязательно для заполения' || errorString === 'Пароль должен содержать не менее 8 символов'" 
           :error="errorString"
           v-model:modelValue="passwordValue"
         />
@@ -40,7 +40,7 @@ const login = () => {
     if (validateInput('login', loginValue.value) && validateInput('password', passwordValue.value)) {
         loginAuth(loginValue.value, passwordValue.value)
     }
-    // console.log(errorString.value)
+    console.log(errorString.value)
 }
 
 const resetError = () => {
@@ -65,7 +65,7 @@ watch(() => passwordValue.value, (actual, next) => {
 const validateInput = (inputType, inputValue) => {
     if (!inputValue) {
         errorString.type = inputType
-        errorString.value = "Это поле обязательно для заполнения";
+        errorString.value = 'Это поле обязательно для заполения';
         return false
     }
 
