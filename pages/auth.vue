@@ -8,7 +8,7 @@
           :type="'text'"
           :title="'логин'"
           :name="'login'"
-          :isError="errorString.value === 'auth/user-not-found' || errorString === 'auth/invalid-email' || errorString === 'Это поле обязательно для заполения' || errorString === 'Введите действительный адрес электронной почты'"
+          :isError="errorString.value === 'auth/user-not-found' || errorString.value === 'auth/invalid-email' || errorString === 'Это поле обязательно для заполения' || errorString === 'Некорректный адрес электронной почты'"
           v-model:modelValue="loginValue"
           :error="errorString"
         />
@@ -18,7 +18,7 @@
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
-          :isError="errorString === 'auth/missing-password' || errorString === 'Это поле обязательно для заполения' || errorString === 'Пароль должен содержать не менее 8 символов'" 
+          :isError="errorString.value === 'auth/too-many-requests' || errorString.value === 'auth/wrong-password' || errorString.value === 'auth/missing-password' || errorString === 'Это поле обязательно для заполения' || errorString === 'Пароль должен содержать не менее 8 символов'" 
           :error="errorString"
           v-model:modelValue="passwordValue"
         />
@@ -40,7 +40,6 @@ const login = () => {
     if (validateInput('login', loginValue.value) && validateInput('password', passwordValue.value)) {
         loginAuth(loginValue.value, passwordValue.value)
     }
-    console.log(errorString.value)
 }
 
 const resetError = () => {
@@ -66,6 +65,7 @@ const validateInput = (inputType, inputValue) => {
     if (!inputValue) {
         errorString.type = inputType
         errorString.value = 'Это поле обязательно для заполения';
+        console.log(errorString.value)
         return false
     }
 
@@ -73,7 +73,8 @@ const validateInput = (inputType, inputValue) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(inputValue)) {
             errorString.type = 'login'
-            errorString.value = "Введите действительный адрес электронной почты";
+            errorString.value = "Некорректный адрес электронной почты";
+            console.log(errorString.value)
             return false
         }
     }
@@ -82,6 +83,7 @@ const validateInput = (inputType, inputValue) => {
         if (inputValue.length < 8) {
             errorString.type = 'login'
             errorString.value = "Пароль должен содержать не менее 8 символов";
+            console.log(errorString.value)
             return false
         }
     }

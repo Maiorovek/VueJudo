@@ -13,7 +13,6 @@
            <img v-if="password" src="../../assets/icons/eye-off.svg" alt=""/>
            <img v-else src="../../assets/icons/eye.svg" alt=""/>
        </span>
-       <!-- {{ errorString.value  }} -->
        <span
          class="span-error"
          v-if="props.isError"
@@ -60,29 +59,37 @@ const typeInput = computed(() => {
 const errorText = computed(() => {
   let text = ''
   switch (props.error) {
-      case 'auth/invalid-email':
-        text = 'Введите действительный адрес электронной почты'
-        break;
-      case 'Введите действительный адрес электронной почты':
-         text = 'Введите действительный адрес электронной почты'
+      
+      case 'Некорректный адрес электронной почты':
+         text = 'Некорректный адрес электронной почты'
          break;
       case 'Это поле обязательно для заполения':
          text = 'Это поле обязательно для заполения'
          break;
-      case 'auth/user-not-found':
-            text = 'Этот почтовый адрес не зарегистрирован'
-            break;
-      case 'auth/missing-password':
-         text = 'Неверный формат пароля'
-         break;
       case 'Пароль должен содержать не менее 8 символов':
          text = 'Пароль должен содержать не менее 8 символов'
          break;
-      case 'auth/wrong-password':
+      
+      
+  }
+  switch (props.error.value) {
+   case 'auth/invalid-email':
+        text = 'Введите действительный адрес электронной почты'
+        break;
+   case 'auth/user-not-found':
+         text = 'Этот почтовый адрес не зарегистрирован'
+         break;
+   case 'auth/missing-password':
+         text = 'Неверный формат пароля'
+         break;
+   case 'auth/wrong-password':
          text = 'Неверный пароль'
          break;
-      
+   case 'auth/too-many-requests':
+         text = 'Слишком много попыток авторизации'
+         break;
   }
   return text
 })
+
 </script>
