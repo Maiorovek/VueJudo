@@ -97,7 +97,7 @@ export const useStore = defineStore('store', {
             param: 'Дзюдо',
          },
       },
-      errorAuth: '',
+      errorAuth: {},
       articles: [],
       categories: [],
       events: [],
@@ -124,8 +124,39 @@ export const useStore = defineStore('store', {
       changeAdminSidebarState() {
         this.adminSidebarIsOpen = !this.adminSidebarIsOpen
       },
-      setErrorAuth(stringError) {
-         this.errorAuth = stringError
+      setErrorAuth(value, type) {
+         let typeString = ''
+         let errorString = ''
+         switch (value) {
+            case 'auth/invalid-email':
+               typeString = 'login'
+               errorString = 'Введите действительный адрес электронной почты'
+               break;
+            case 'auth/user-not-found':
+               typeString = 'login'
+               errorString = 'Этот почтовый адрес не зарегистрирован'
+               break;
+            case 'auth/missing-password':
+               typeString = 'password'
+               errorString = 'Неверный формат пароля'
+               break;
+            case 'auth/wrong-password':
+               typeString = 'password'
+               errorString = 'Неверный пароль'
+               break;
+            case 'auth/too-many-requests':
+               typeString = 'login'
+               errorString = 'Слишком много попыток авторизации'
+               break;
+            default:
+               typeString = type
+               errorString = value
+               break;
+         }
+         this.errorAuth = {
+            value: errorString,
+            type: typeString
+         }
       },
       changeModalState() {
          this.editedModalState = !this.editedModalState
