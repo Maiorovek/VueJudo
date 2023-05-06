@@ -3,93 +3,36 @@
         <div class="auth-title">
             Авторизация
         </div>
-        <inputCustom
+        <input-custom
           :placeholder="'Логин'"
           :type="'text'"
           :title="'логин'"
           :name="'login'"
-          :isError="errorString.value === 'auth/user-not-found' || errorString.value === 'auth/invalid-email' || errorString === 'Это поле обязательно для заполения' || errorString === 'Некорректный адрес электронной почты'"
-          v-model:modelValue="loginValue"
-          :error="errorString"
+          :isError="errorAuth.type === 'login'"
+          :error="errorAuth.value"
+          v-model="loginValue"
         />
-        <!-- {{ errorString.value }} -->
-        <inputCustom
+        <input-custom
           :placeholder="'Пароль'"
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
-          :isError="errorString.value === 'auth/too-many-requests' || errorString.value === 'auth/wrong-password' || errorString.value === 'auth/missing-password' || errorString === 'Это поле обязательно для заполения' || errorString === 'Пароль должен содержать не менее 8 символов'" 
-          :error="errorString"
-          v-model:modelValue="passwordValue"
+          :isError="errorAuth.type === 'password'"
+          :error="errorAuth.value"
+          v-model="passwordValue"
         />
-        <button @click.prevent="login" class="auth-button">Войти</button>
+        <v-button
+          @click.prevent="login"
+          class="auth-button"
+          :text="'Войти'"
+          :isLoading="buttonLoad.value"
+          :isDisabled="buttonLoad.value"
+        />
     </form>
 </template>
 
 <script setup>
-import { useStore } from "~/store";
-import InputCustom from "~/components/ui/input-custom.vue";
-import loginAuth from "~/server/login";
-
-const loginValue = ref('')
-const passwordValue = ref('')
-const data = ref([])
-const errorString = ref('')
-
-const login = () => {
-    if (validateInput('login', loginValue.value) && validateInput('password', passwordValue.value)) {
-        loginAuth(loginValue.value, passwordValue.value)
-    }
-}
-
-const resetError = () => {
-    errorString.value = ''
-    errorString.type = ''
-    useStore().setErrorAuth('')
-}
-const errorAuth = computed(() => useStore().getErrorAuth)
-
-watch(() => useStore().getErrorAuth, () => {
-    errorString.value = errorAuth
-});
-
-watch(() => loginValue.value, (actual, next) => {
-    if (next !== actual) resetError()
-});
-
-watch(() => passwordValue.value, (actual, next) => {
-    if (next !== actual) resetError()
-});
-
-const validateInput = (inputType, inputValue) => {
-    if (!inputValue) {
-        errorString.type = inputType
-        errorString.value = 'Это поле обязательно для заполения';
-        console.log(errorString.value)
-        return false
-    }
-
-    if (inputType === "login") {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(inputValue)) {
-            errorString.type = 'login'
-            errorString.value = "Некорректный адрес электронной почты";
-            console.log(errorString.value)
-            return false
-        }
-    }
-
-    if (inputType === "password") {
-        if (inputValue.length < 8) {
-            errorString.type = 'login'
-            errorString.value = "Пароль должен содержать не менее 8 символов";
-            console.log(errorString.value)
-            return false
-        }
-    }
-
-    return true
-}
+import VButton from "~/components/ui/v-button.vue";
 
 definePageMeta({
    layout: "auth",
@@ -97,4 +40,61 @@ definePageMeta({
 useHead({
    title: `Авторизация`,
 })
+
+import { useStore } from "~/store";
+import InputCustom from "~/components/ui/input-custom.vue";
+import loginAuth from "~/server/login";
+
+const loginValue = ref('')
+const passwordValue = ref('')
+const data = ref([])
+const buttonLoad = ref(false)
+
+const login = () => {
+   if (validateInput('login', loginValue.value) && validateInput('password', passwordValue.value)) {
+      buttonLoad.value = true
+      loginAuth(loginValue.value, passwordValue.value)
+   }
+}
+
+const resetError = () => {
+   buttonLoad.value = false
+   useStore().setErrorAuth('', '')
+}
+const errorAuth = computed(() => useStore().getErrorAuth)
+
+watch(() => loginValue.value, (actual, next) => {
+   if (next !== actual && errorAuth.value !== '') resetError()
+});
+
+watch(() => passwordValue.value, (actual, next) => {
+   if (next !== actual && errorAuth.value !== '') resetError()
+});
+
+const validateInput = (inputType, inputValue) => {
+   if (!inputValue) {
+      useStore().setErrorAuth('Это поле обязательно для заполения', inputType)
+      buttonLoad.value = true
+      return false
+   }
+
+   if (inputType === "login") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(inputValue)) {
+         useStore().setErrorAuth('Некорректный адрес электронной почты', inputType)
+         buttonLoad.value = true
+         return false
+      }
+   }
+
+   if (inputType === "password") {
+      if (inputValue.length < 8) {
+         useStore().setErrorAuth('Пароль должен содержать не менее 8 символов', inputType)
+         buttonLoad.value = true
+         return false
+      }
+   }
+
+   return true
+}
 </script>
