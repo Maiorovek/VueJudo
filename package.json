@@ -9,8 +9,10 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.4",
+    "@nuxt/typescript-build": "^3.0.1",
     "@nuxtjs/svg": "^0.4.0",
-    "nuxt": "^3.3.3"
+    "nuxt": "^3.3.3",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.5",
@@ -32,11 +34,14 @@
     "element-plus": "^2.3.3",
     "file-loader": "^6.2.0",
     "firebase": "^9.19.1",
+    "maska": "^2.1.9",
     "pinia": "^2.0.34",
     "postcss": "^8.4.21",
     "sass": "^1.61.0",
     "sass-loader": "^13.2.2",
+    "v-mask": "^2.3.0",
     "vue-full-calendar": "^2.8.1-0",
+    "vue-the-mask": "^0.11.1",
     "vuetify": "^3.1.13",
     "vuex": "^4.1.0",
     "yup": "^1.0.2"

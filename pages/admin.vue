@@ -44,7 +44,7 @@ export default {
    },
    data() {
       return {
-         selectComponent: shallowRef(adminMain),
+         selectComponent: shallowRef(adminEvents),
       }
    },
    methods: {

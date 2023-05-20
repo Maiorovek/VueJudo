@@ -34,7 +34,7 @@
           @change="imageEdit"
         />
         <img :src="articlePreview" alt="Превью" class="admin-preview">
-        <Editor2 :content="articleContent" @valueEditor="valueEditor"/>
+        <Editor :content="articleContent" @valueEditor="valueEditor"/>
         <div class="admin-buttons__wrapper">
             <el-button
               v-if="this.dataPage.action === 'add'"
@@ -61,14 +61,14 @@
 </template>
 
 <script>
-import Editor2 from "~/components/editor/Editor2.vue";
+import Editor from "~/components/editor/Editor.vue";
 import { useStore } from "~/store";
 import decoderImage from "~/utils/decoder-image";
 import transliter from "~/utils/translit";
 
 export default {
    name: "add-articles",
-   components: {Editor2},
+   components: {Editor},
    setup() {
       useHead({
          titleTemplate: '%s : Добавление статьи',
@@ -121,7 +121,7 @@ export default {
    },
    methods: {
       async imageEdit() {
-         this.articlePreview = decoderImage(this.$refs.image)
+         this.articlePreview = await decoderImage(this.$refs.image)
       },
       returnToBack() {
          this.$emit('currentComponent', 'adminArticles')
@@ -136,7 +136,10 @@ export default {
          this.returnToBack()
       },
       addItem() {
-         const data = {...this.createObject}
+         let data = {...this.createObject}
+         if (data.hasOwnProperty('indexDB')) {
+             delete data.indexDB
+         }
          useStore().addItem(data, 'articles', 'articles-list')
          this.returnToBack()
       },

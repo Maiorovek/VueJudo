@@ -18,6 +18,7 @@ export default {
       useStore().fetchArticleCategories()
       useStore().fetchArticlesList()
       useStore().fetchEventsList()
+      useStore().fetchFriendsList()
    },
 }
 </script>
