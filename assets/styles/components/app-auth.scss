@@ -44,16 +44,24 @@
             width: 100%;
             height: 60px;
             background: #4272d7;
-            color: #fff;
             font-weight: 600;
             border: 2px solid #4272d7;
             transition: background .2s linear, color .2s linear;
             border-radius: 3px;
 
-            &:hover {
-                color: #4272d7;
+            span {
+                color: #fff;
+                transition: color .2s linear;
+            }
+
+            &:hover:not(.disabled):not(.loading) {
                 background: transparent;
-                transition: background .2s linear, color .2s linear;
+                transition: background .2s linear;
+
+                span {
+                    color: #4272d7;
+                    transition: color .2s linear;
+                }
             }
         }
     }

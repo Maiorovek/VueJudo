@@ -1,17 +1,25 @@
 // Components
 @import "components/main";
-@import "components/ui/buttons";
-@import "components/ui/input";
-@import "components/ui/checbox";
 @import "components/modal";
 @import "components/app-main";
 @import "components/app-header";
 @import "components/app-footer";
 @import "components/app-auth";
-@import "components/admin/app-admin";
+@import "components/calendar";
 
 // Sections
 @import "components/sections/news-section";
+@import "components/sections/events-section";
 
 // Pages
 @import "components/page/news-page";
+
+// UI
+@import "components/ui/buttons";
+@import "components/ui/input";
+@import "components/ui/checbox";
+@import "components/ui/loader";
+
+//Admin
+@import "components/admin/app-admin";
+@import "components/admin/admin-friends";
