@@ -36,6 +36,13 @@ const createObject = (index, data, type) => {
             end
          }
          break;
+      case 'friends':
+         console.log(data)
+         newData = {
+            ...data,
+            id: index === null ? data.id : index,
+         }
+         break;
    }
    return newData
 }

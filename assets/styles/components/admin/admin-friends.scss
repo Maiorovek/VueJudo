@@ -1,0 +1,19 @@
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+    .friend {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+
+        & > * {
+            min-width: 140px;
+        }
+
+        span {
+            padding: 7px 17.5px;
+        }
+    }
+}

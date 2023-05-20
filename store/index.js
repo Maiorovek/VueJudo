@@ -97,11 +97,16 @@ export const useStore = defineStore('store', {
             param: 'Дзюдо',
          },
       },
+      indexPageSetting: {
+         newsList: {
+            state: true,
+         },
+      },
       errorAuth: {},
       articles: [],
       categories: [],
       events: [],
-
+      friends: [],
    }),
    getters: {
       getStateAdminSidebar: state => state.adminSidebarIsOpen,
@@ -114,15 +119,17 @@ export const useStore = defineStore('store', {
       getArticles: state => state.articles,
       getStateDownloadArticles: state => state.stateDownloadArticles,
       getErrorAuth: state => state.errorAuth,
-      getArticle: (state) => index => {
+      getArticle: state => index => {
          return state.articles.find(news => news.id === Number(index))
       },
       getDataArticle: state => state.dataArticle,
       getEvents: state => state.events,
+      getIndexPageSetting: state => state.indexPageSetting,
+      getFriendsList: state => state.friends
    },
    actions: {
       changeAdminSidebarState() {
-        this.adminSidebarIsOpen = !this.adminSidebarIsOpen
+         this.adminSidebarIsOpen = !this.adminSidebarIsOpen
       },
       setErrorAuth(value, type) {
          let typeString = ''
@@ -245,6 +252,21 @@ export const useStore = defineStore('store', {
             });
          });
          this.events.sort((prev, next) => {
+            return prev.id - next.id
+         });
+      },
+      async fetchFriendsList() {
+         onSnapshot(collection(database, 'companions-list'), querySnapshot => {
+            querySnapshot.forEach((doc) => {
+               if (this.friends.filter(item => item.id === doc.data().id).length < 1) {
+                  this.friends.push({
+                     ...doc.data(),
+                     indexDB: doc.id,
+                  })
+               }
+            });
+         });
+         this.friends.sort((prev, next) => {
             return prev.id - next.id
          });
       },
