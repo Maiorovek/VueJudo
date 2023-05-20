@@ -12,15 +12,17 @@
           v-model:modelValue="loginValue"
           :error="errorString"
         />
+
         <!-- {{ errorString.value }} -->
+
         <inputCustom
           :placeholder="'Пароль'"
           :type="'password'"
           :title="'пароль'"
           :name="'password'"
           :isError="errorString.value === 'auth/too-many-requests' || errorString.value === 'auth/wrong-password' || errorString.value === 'auth/missing-password' || errorString === 'Это поле обязательно для заполения' || errorString === 'Пароль должен содержать не менее 8 символов'" 
-          :error="errorString"
           v-model:modelValue="passwordValue"
+          :error="errorString"
         />
         <button @click.prevent="login" class="auth-button">Войти</button>
     </form>
