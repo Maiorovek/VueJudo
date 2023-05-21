@@ -7,7 +7,7 @@
          <FullCalendar class="events-table" :options="calendarOptions" />
          <div class="events-table">
             <span class="event-table-text"> Сегодня {{ this.getCurrentDay }} </span>
-            <FullCalendar class="events-table-list" :options="calendar" />
+            <FullCalendar class="events-table-list" :options="calendar" :key="calendar.key"/>
          </div>
       </div>
       <div class="fuck-yeah"> </div>
@@ -21,6 +21,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list';
 import { useStore } from "~/store";
+
 export default {
    setup() {
       useHead({
@@ -65,6 +66,7 @@ export default {
             titleFormat: {
                month: 'long', day: 'numeric'
             },
+            navLinkDayClick: this.selectDay,
          },
          calendar: {
             slotLabelFormat: {
@@ -102,6 +104,19 @@ export default {
             titleFormat: {
                month: 'long', day: 'numeric'
             },
+            key: 1,
+         },
+      }
+   },
+   methods: {
+      selectDay(day) {
+         const originalDate = new Date(day);
+         const timezoneOffset = originalDate.getTimezoneOffset() * 60000;
+         const formattedDate = new Date(originalDate - timezoneOffset).toISOString().substring(0, 10);
+
+         if (this.calendar.initialDate !== formattedDate) {
+            this.calendar.initialDate = formattedDate
+            this.calendar.key++
          }
       }
    },

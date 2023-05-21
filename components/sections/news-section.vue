@@ -1,6 +1,6 @@
 <template>
     <section class="news-section">
-        <div class="news" v-for="news in newsList.slice(0, 3)">
+        <div class="news" v-for="news in filteredListNews.slice(0, 3)">
             <div class="image">
                 <img :src="news.preview" alt="">
             </div>
@@ -28,6 +28,11 @@ export default {
    computed: {
       newsList() {
          return useStore().getArticles
+      },
+      filteredListNews() {
+         return this.newsList.filter(news => {
+            return news.status
+         })
       },
       categoryList() {
          return useStore().getCategories

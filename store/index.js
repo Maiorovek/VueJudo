@@ -134,6 +134,7 @@ export const useStore = defineStore('store', {
       setErrorAuth(value, type) {
          let typeString = ''
          let errorString = ''
+
          switch (value) {
             case 'auth/invalid-email':
                typeString = 'login'
@@ -160,6 +161,7 @@ export const useStore = defineStore('store', {
                errorString = value
                break;
          }
+
          this.errorAuth = {
             value: errorString,
             type: typeString
@@ -208,7 +210,7 @@ export const useStore = defineStore('store', {
       },
       async removeItem(data, type, path) {
          this[type] = this[type].filter(item => item.id !== data.id)
-         await deleteDocument(path, data.indexDB)
+         if (data.id !== null) await deleteDocument(path, data.indexDB)
       },
       async fetchArticleCategories() {
          onSnapshot(collection(database, 'article-categories'), querySnapshot => {

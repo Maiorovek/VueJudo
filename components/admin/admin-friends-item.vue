@@ -1,18 +1,20 @@
 <template>
-    <div class="friend">
+    <div class="friend" ref="check">
         <div class="name" ref="name">
             <span v-if="!isChange" v-text="friend.name"/>
-            <input v-else placeholder="Название" v-model="name" name="name" type="text" class="input">
+            <input v-else placeholder="Название" required-input v-model="name" name="name" type="text"
+                   class="input">
         </div>
 
         <div class="address" ref="address">
             <span v-if="!isChange" v-text="friend.address"/>
-            <input v-else placeholder="Адресс" v-model="address" name="address" type="text" class="input">
+            <input v-else placeholder="Адрес" required-input v-model="address" name="address" type="text"
+                   class="input">
         </div>
 
         <div class="number" ref="number">
             <span v-if="!isChange" v-text="friend.number"/>
-            <input v-else placeholder="Номер телефона" v-model="number" name="number" type="text" v-maska
+            <input v-else placeholder="Номер телефона" required-input v-model="number" name="number" type="text" v-maska
                    data-maska="8-(###)-###-##-##"
                    class="input">
         </div>
@@ -21,18 +23,20 @@
             <span v-if="!isChange" class="time">
                 {{ friend.time.from }} - {{ friend.time.to }}
             </span>
-            <input v-else placeholder="Время работы" v-model="time" name="time" type="text" v-maska
+            <input v-else placeholder="Время работы" required-input v-model="time" name="time" type="text" v-maska
                    data-maska="##:## - ##:##" class="input">
         </div>
 
         <VButton :text="isChange ? 'Отменить' : 'Изменить'" @click="replaceDivsWithInputs"/>
-        <VButton :text="isChange ? 'Сохранить' : 'Удалить'" class="red" @click="deleteFriend"/>
+        <VButton :text="isChange ? this.friend.id === null ? 'Добавить' : 'Сохранить' : 'Удалить'" class="red"
+                 @click="deleteFriend"/>
     </div>
 </template>
 
 <script>
 import VButton from "~/components/ui/v-button.vue";
 import { useStore } from "~/store";
+import checkInput from "~/utils/checkInput";
 
 export default {
    name: "admin-friends-item",
@@ -60,10 +64,15 @@ export default {
    },
    methods: {
       deleteFriend() {
+         if (!checkInput(this.$refs.check)) return false
+
          if (this.friend.id === null) {
-            useStore().friends = useStore().friends.filter(item => item.id !== this.friend.id)
+            const newData = this.createObject()
+            useStore().addItem(newData, 'friends', 'companions-list')
+            useStore().removeItem(this.friend, 'friends')
             return false
          }
+
          if (!this.isChange) {
             useStore().changeModalData(this.friend, 'friends', 'remove', 'Удалить друга?', 'companions-list')
          } else {
@@ -72,6 +81,9 @@ export default {
          }
       },
       replaceDivsWithInputs() {
+         if (this.friend.id === null) {
+            useStore().removeItem(this.friend, 'friends')
+         }
 
          if (!this.isChange) {
             const names = Object.keys(this.$refs)
@@ -99,7 +111,7 @@ export default {
          const {number, name, address} = this;
          const time = this.time.split('-')
 
-         return {
+         const newObject = {
             id: this.friend.id,
             indexDB: this.friend.indexDB,
             number,
@@ -110,6 +122,13 @@ export default {
                to: time[1].trim()
             }
          }
+
+         if (newObject.id === null) {
+            delete newObject.id;
+            delete newObject.indexDB;
+         }
+
+         return newObject
       },
       setDefault() {
          const {number, name, address, time} = this.friend;
@@ -117,7 +136,7 @@ export default {
          this.name = name;
          this.address = address;
          this.time = `${time.from} - ${time.to}`;
-      }
+      },
    },
 }
 </script>
