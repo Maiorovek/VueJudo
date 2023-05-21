@@ -1,11 +1,69 @@
-.fc-theme-standard td, .fc-theme-standard th {
-    border: none;
-
-    &:hover {
-
+.events-sections__inner {
+    .fc-theme-standard td, .fc-theme-standard th {
+        border: none;
+    
+        &:hover {
+    
+        }
     }
-}
+    
+    .fc-scrollgrid-sync-inner {
+        font-size: 16px;
+        font-weight: 600;
+        color: #656565;
+    }
+    
+    .fc-daygrid-day-number {
+        font-size: 24px;
+        font-weight: 700;
+        color: #131313;
+    }
+    
 
-.fc .fc-daygrid-day.fc-day-today {
+    .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+        display: grid;
+        place-items: center;
+    }
 
+    .fc-dayGridMonth-button.fc-button.fc-button-primary, 
+    .fc-timeGridWeek-button.fc-button.fc-button-primary, 
+    .fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active, 
+    .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
+        border: none;
+        background-color: #fff;
+        color: #131313;
+        box-shadow: 0 2px 20px rgba(130, 130, 130, 0.2);
+
+        &:focus-visible { 
+            border: none;
+            outline: none;
+        }
+
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+        margin-bottom: 0;
+    }
+
+    .fc-timeGridWeek-view.fc-view.fc-timegrid,
+    .fc-dayGridMonth-view.fc-view.fc-daygrid {
+        box-shadow: 0 2px 20px rgba(130, 130, 130, 0.2);
+    }
+
+    .fc-scrollgrid.fc-scrollgrid-liquid {
+        border: none;
+    }
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #C9C9C9;
+        border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
 }

@@ -1,13 +1,17 @@
 <template>
-	<section class="events-section">
-		 <h2 class="events-section__title title-section">
-			События
-		 </h2>
-		 <div class="events-sections__inner">
-           <FullCalendar class="events-table" :options="calendarOptions"/>
-           <FullCalendar class="events-table" :options="calendar"/>
-		 </div>
-	</section>
+   <section class="events-section">
+      <h2 class="events-section__title title-section">
+         События
+      </h2>
+      <div class="events-sections__inner">
+         <FullCalendar class="events-table" :options="calendarOptions" />
+         <div class="events-table">
+            <span class="event-table-text"> Сегодня {{ this.getCurrentDay }} </span>
+            <FullCalendar class="events-table-list" :options="calendar" />
+         </div>
+      </div>
+      <div class="fuck-yeah"> </div>
+   </section>
 </template>
 
 <script>
@@ -23,13 +27,18 @@ export default {
          title: `События`,
       })
    },
-   components: {FullCalendar},
+   components: { FullCalendar },
    data() {
       return {
          calendarOptions: {
+            slotLabelFormat: {
+               hour: '2-digit',
+               minute: '2-digit',
+               meridiem: false
+            },
             headerToolbar: {
                left: "",
-	            right: "",
+               right: "",
                center: "dayGridMonth,timeGridWeek"
             },
             buttonText: {
@@ -53,12 +62,16 @@ export default {
             allDayText: 'Весь день',
             allDaySlot: false,
             firstDay: 1,
-            events: useStore().getEvents,
             titleFormat: {
                month: 'long', day: 'numeric'
             },
          },
          calendar: {
+            slotLabelFormat: {
+               hour: '2-digit',
+               minute: '2-digit',
+               meridiem: false
+            },
             headerToolbar: {
                left: "",
                right: "",
@@ -92,10 +105,13 @@ export default {
          }
       }
    },
-   methods: {}
+   computed: {
+      getCurrentDay() {
+         const options = { day: 'numeric', month: 'long', year: 'numeric' }
+         return (new Date()).toLocaleDateString('ru-RU', options)
+      }
+   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

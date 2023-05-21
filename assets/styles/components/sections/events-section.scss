@@ -5,7 +5,17 @@
         column-gap: 50px;
 
         .events-table {
-            width: 620px;
+            width: 660px;
+            max-width: 50%;
+            .event-table-text {
+                font-size: 32px;
+                font-weight: 700;
+            }
         }
     }
+    
+    .fuck-yeah {
+        margin-bottom: 40px;
+    }
+      
 }
