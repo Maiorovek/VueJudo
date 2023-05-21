@@ -1,40 +1,45 @@
 .events-sections__inner {
-    .fc-theme-standard td, .fc-theme-standard th {
+
+    .fc-theme-standard td,
+    .fc-theme-standard th {
         border: none;
-    
-        &:hover {
-    
-        }
+
+        &:hover {}
     }
-    
+
     .fc-scrollgrid-sync-inner {
         font-size: 16px;
         font-weight: 600;
         color: #656565;
     }
-    
+
     .fc-daygrid-day-number {
         font-size: 24px;
         font-weight: 700;
         color: #131313;
+        transition: color .2 linear;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
     }
-    
+
 
     .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
         display: grid;
         place-items: center;
     }
 
-    .fc-dayGridMonth-button.fc-button.fc-button-primary, 
-    .fc-timeGridWeek-button.fc-button.fc-button-primary, 
-    .fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active, 
+    .fc-dayGridMonth-button.fc-button.fc-button-primary,
+    .fc-timeGridWeek-button.fc-button.fc-button-primary,
+    .fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active,
     .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
         border: none;
         background-color: #fff;
         color: #131313;
         box-shadow: 0 2px 20px rgba(130, 130, 130, 0.2);
 
-        &:focus-visible { 
+        &:focus-visible {
             border: none;
             outline: none;
         }
@@ -50,20 +55,65 @@
 
     .fc-timeGridWeek-view.fc-view.fc-timegrid,
     .fc-dayGridMonth-view.fc-view.fc-daygrid {
-        box-shadow: 0 2px 20px rgba(130, 130, 130, 0.2);
+        box-shadow: 0 2px 20px rgba(130, 130, 130, .2);
     }
 
     .fc-scrollgrid.fc-scrollgrid-liquid {
         border: none;
     }
-    ::-webkit-scrollbar {
-        width: 6px;
+
+    .fc-day.fc-day-today.fc-daygrid-day {
+        background-color: #2B026F;
+
+        .fc-daygrid-day-number {
+            color: #fff !important;
+        }
     }
-    ::-webkit-scrollbar-thumb {
-        background-color: #C9C9C9;
-        border-radius: 6px;
+
+    .fc a[data-navlink] {
+        text-decoration: none;
     }
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: #555;
+
+    .fc-daygrid-day-events {
+        display: none;
+    }
+
+    .fc-daygrid-day-bg {
+        display: none;
+    }
+
+    .fc-daygrid-day-frame {
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+    .fc-daygrid-day-top {
+        width: 100%;
+        height: 100%;
+    }
+
+    .fc.fc-daygrid-day-top {
+        display: block;
+    }
+
+    .fc-day.fc-day-past.fc-daygrid-day,
+    .fc-day.fc-day-today.fc-daygrid-day,
+    .fc-day.fc-day-future.fc-daygrid-day {
+        transition: background-color .2s linear;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(43, 2, 111, .1);
+            transition: background-color .2s linear;
+
+            .fc-daygrid-day-number {
+                color: #131313 !important;
+                transition: color .2s linear;
+            }
+        }
+
     }
 }

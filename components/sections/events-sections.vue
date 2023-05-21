@@ -5,10 +5,7 @@
       </h2>
       <div class="events-sections__inner">
          <FullCalendar class="events-table" :options="calendarOptions" />
-         <div class="events-table">
-            <span class="event-table-text"> Сегодня {{ this.getCurrentDay }} </span>
-            <FullCalendar class="events-table-list" :options="calendar" :key="calendar.key"/>
-         </div>
+         <FullCalendar class="events-table" :options="calendar" :key="calendar.key" />
       </div>
       <div class="fuck-yeah"> </div>
    </section>
@@ -77,7 +74,7 @@ export default {
             headerToolbar: {
                left: "",
                right: "",
-               center: ""
+               center: "title"
             },
             buttonText: {
                prev: '<',
@@ -93,7 +90,7 @@ export default {
             navLinks: true,
             editable: true,
             dayMaxEvents: true,
-            plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin],
+            plugins: [timeGridPlugin, listPlugin],
             initialView: 'timeGridDay',
             nowIndicator: true,
             locale: 'ru',
@@ -102,7 +99,7 @@ export default {
             firstDay: 1,
             events: useStore().getEvents,
             titleFormat: {
-               month: 'long', day: 'numeric'
+               year: 'numeric', month: 'long', day: 'numeric'
             },
             key: 1,
          },
@@ -120,12 +117,7 @@ export default {
          }
       }
    },
-   computed: {
-      getCurrentDay() {
-         const options = { day: 'numeric', month: 'long', year: 'numeric' }
-         return (new Date()).toLocaleDateString('ru-RU', options)
-      }
-   }
+   computed: {}
 }
 </script>
 
