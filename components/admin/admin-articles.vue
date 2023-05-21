@@ -49,7 +49,8 @@ export default {
    },
    methods: {
       removeItem(data) {
-         useStore().changeModalData(data, 'articles', 'remove', 'Удалить статью?', 'articles-list')
+          console.log(data)
+         // useStore().changeModalData(data, 'articles', 'remove', 'Удалить статью?', 'articles-list')
       },
       changeArticle(data) {
          useStore().saveChangeArticle(data, 'change')

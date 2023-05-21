@@ -9,9 +9,9 @@ export default defineNuxtConfig({
          {
             rel: 'icon',
             type: 'image/x-icon',
-            href: 'public/favicon.png'
+            href: 'public/favicon.ico'
          }
-      ],
+      ]
    },
 
    css: [
@@ -22,8 +22,8 @@ export default defineNuxtConfig({
    ],
 
    modules: [
-      '@pinia/nuxt',
-      '@element-plus/nuxt'
+      '@element-plus/nuxt',
+      '@pinia/nuxt'
    ],
 
    buildModules: [

@@ -3,6 +3,10 @@
     border: 1px solid #003882;
     padding: 6px 12px;
     width: 100%;
+
+    &.error {
+        border-color: red;
+    }
 }
 
 .custom-input {

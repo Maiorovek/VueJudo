@@ -1,0 +1,50 @@
+.footer-section {
+    background: #131313;
+    padding: 40px 0px;
+
+    &__inner {
+        display: flex;
+
+        .footer__block {
+
+            &:first-child {
+                width: 70%;
+            }
+
+            &__logo {
+                color: #fff;
+                display: flex;
+
+                .logo__image {
+                    font-size: 32px;
+                }
+                
+                .logo__text {
+                    max-width: 200px;
+                    margin-left: 8px;
+                    font-size: 15px;
+                }
+
+            }
+
+            &__info {
+                color: #fff;
+                font-size: 15px;
+                max-width: 260px;
+                margin-top: 15px;
+            }
+
+            &__links {
+                color: #fff;
+                margin-bottom: 15px;
+                max-width: 360px;
+                font-size: 15px;
+                
+                &:last-child {
+                    font-size: 24px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

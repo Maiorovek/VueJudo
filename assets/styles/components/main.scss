@@ -1,4 +1,6 @@
-*, *:after, *:before {
+*,
+*:after,
+*:before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,11 +10,37 @@ body {
     position: relative;
 }
 
-ul, ol, li {
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #C9C9C9;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+
+ul,
+ol,
+li {
     list-style-type: none;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .wrapper {
+    width: 100%;
     max-width: 1680px;
     margin: 0 auto;
     padding: 0 30px;

@@ -1,5 +1,6 @@
 const createObject = (index, data, type) => {
    let newData = {}
+
    switch (type) {
       case 'categories':
          newData = {
@@ -34,6 +35,12 @@ const createObject = (index, data, type) => {
             id: index === null ? data.date : index,
             start,
             end
+         }
+         break;
+      case 'friends':
+         newData = {
+            ...data,
+            id: index === null ? data.id : index,
          }
          break;
    }

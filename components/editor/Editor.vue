@@ -1,195 +1,156 @@
 <template>
-    <div class="editor" v-if="editor">
-        <menu-bar class="editor__header" :editor="editor"/>
-        <editor-content class="editor__content" :editor="editor"/>
+    <div>
+        <DxHtmlEditor
+          :value="content"
+          height="725px"
+          @update:value="newValue"
+        >
+            <DxMediaResizing :enabled="true"/>
+            <DxImageUpload
+              :tabs="currentTabs"
+              file-upload-mode="base64"
+            />
+            <DxToolbar :multiline="isMultiline">
+                <DxItem name="undo"/>
+                <DxItem name="redo"/>
+                <DxItem name="separator"/>
+                <DxItem
+                  :accepted-values="sizeValues"
+                  name="size"
+                />
+                <DxItem
+                  :accepted-values="fontValues"
+                  name="font"
+                />
+                <DxItem name="separator"/>
+                <DxItem name="bold"/>
+                <DxItem name="italic"/>
+                <DxItem name="strike"/>
+                <DxItem name="underline"/>
+                <DxItem name="separator"/>
+                <DxItem name="alignLeft"/>
+                <DxItem name="alignCenter"/>
+                <DxItem name="alignRight"/>
+                <DxItem name="alignJustify"/>
+                <DxItem name="separator"/>
+                <DxItem name="orderedList"/>
+                <DxItem name="bulletList"/>
+                <DxItem name="separator"/>
+                <DxItem
+                  :accepted-values="headerValues"
+                  name="header"
+                />
+                <DxItem name="separator"/>
+                <DxItem name="color"/>
+                <DxItem name="background"/>
+                <DxItem name="separator"/>
+                <DxItem name="link"/>
+                <DxItem name="image"/>
+                <DxItem name="separator"/>
+                <DxItem name="clear"/>
+                <DxItem name="codeBlock"/>
+                <DxItem name="blockquote"/>
+                <DxItem name="separator"/>
+                <DxItem name="insertTable"/>
+                <DxItem name="deleteTable"/>
+                <DxItem name="insertRowAbove"/>
+                <DxItem name="insertRowBelow"/>
+                <DxItem name="deleteRow"/>
+                <DxItem name="insertColumnLeft"/>
+                <DxItem name="insertColumnRight"/>
+                <DxItem name="deleteColumn"/>
+            </DxToolbar>
+        </DxHtmlEditor>
     </div>
 </template>
-
 <script>
-import StarterKit from '@tiptap/starter-kit'
-import { Editor, EditorContent } from '@tiptap/vue-3'
-
-import MenuBar from '~/components/editor/EditorMenuBar.vue'
+import {
+   DxHtmlEditor,
+   DxToolbar,
+   DxMediaResizing,
+   DxImageUpload,
+   DxItem
+} from 'devextreme-vue/html-editor';
+import { DxCheckBox } from 'devextreme-vue/check-box';
+import { DxSelectBox } from 'devextreme-vue/select-box';
+import { tabs, sizeValues, fontValues } from './data';
 
 export default {
    components: {
-      EditorContent,
-      MenuBar,
+      DxHtmlEditor,
+      DxMediaResizing,
+      DxToolbar,
+      DxItem,
+      DxImageUpload,
+      DxCheckBox,
+      DxSelectBox,
+   },
+   props: {
+      content: ``,
    },
    data() {
       return {
-         editor: null,
+         tabs,
+         sizeValues,
+         fontValues,
+         headerValues: [false, 1, 2, 3, 4, 5],
+         currentTabs: tabs[2].value,
+         isMultiline: true,
+      };
+   },
+   methods: {
+      newValue(value) {
+         this.$emit('valueEditor', value)
       }
-   },
-   emits: ['update:modelValue'],
-   props: {
-      modelValue: {
-         type: String,
-         default: '',
-      },
-      cancelArticle: Boolean
-   },
-
-   mounted() {
-      this.editor = new Editor({
-         extensions: [
-            StarterKit.configure({
-               history: true,
-            }),
-         ],
-         content: this.modelValue,
-         onUpdate: () => {
-            this.$emit('update:modelValue', this.editor.getHTML())
-         },
-      })
-   },
-   watch: {
-      cancelArticle() {
-         this.editor.destroy()
-      }
-   },
-}
+   }
+};
 </script>
-
-<style lang="scss">
-.editor {
-    display: flex;
-    flex-direction: column;
-    max-height: fit-content;
-    color: #0D0D0D;
-    background-color: #FFF;
-    border: 3px solid #0D0D0D;
-    border-radius: 0.75rem;
-
-    &__header {
-        display: flex;
-        align-items: center;
-        flex: 0 0 auto;
-        flex-wrap: wrap;
-        padding: 0.25rem;
-        border-bottom: 3px solid #0D0D0D;
-    }
-
-    &__content {
-        min-height: 600px;
-        padding: 1.25rem 1rem;
-        flex: 1 1 auto;
-        overflow-x: hidden;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+<style>
+.dx-htmleditor {
+    border-color: #0D0D0D;
 }
-</style>
 
-<style lang="scss">
-.collaboration-cursor__caret {
-    position: relative;
-    margin-left: -1px;
-    margin-right: -1px;
+.dx-htmleditor .dx-htmleditor-toolbar-wrapper:first-child {
+    border-bottom: 1px solid #0D0D0D;
+}
+
+.dx-htmleditor-toolbar-separator {
     border-left: 1px solid #0D0D0D;
-    border-right: 1px solid #0D0D0D;
-    word-break: normal;
-    pointer-events: none;
 }
 
-/* Render the username above the caret */
-.collaboration-cursor__label {
-    position: absolute;
-    top: -1.4em;
-    left: -1px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    user-select: none;
-    color: #0D0D0D;
-    padding: 0.1rem 0.3rem;
-    border-radius: 3px 3px 3px 0;
-    white-space: nowrap;
+.dx-htmleditor-content img {
+    vertical-align: middle;
+    padding-right: 10px;
 }
 
-/* Basic editor styles */
-.ProseMirror {
-    > * + * {
-        margin-top: 0.75em;
-    }
+.dx-htmleditor-content table {
+    width: 50%;
+}
 
-    ul,
-    ol {
-        padding: 0 1rem;
-    }
+.options {
+    padding: 20px;
+    background-color: rgba(191, 191, 191, 0.15);
+    margin-top: 20px;
+}
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        line-height: 1.1;
-    }
+.caption {
+    font-size: 18px;
+    font-weight: 500;
+}
 
-    code {
-        background-color: rgba(#616161, 0.1);
-        color: #616161;
-    }
+.option {
+    margin-top: 10px;
+    display: inline-block;
+    margin-right: 40px;
+}
 
-    pre {
-        background: #0D0D0D;
-        color: #FFF;
-        font-family: 'JetBrainsMono', monospace;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
+.option > .dx-selectbox,
+.option > .label {
+    display: inline-block;
+    vertical-align: middle;
+}
 
-        code {
-            color: inherit;
-            padding: 0;
-            background: none;
-            font-size: 0.8rem;
-        }
-    }
-
-    mark {
-        background-color: #FAF594;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    hr {
-        margin: 1rem 0;
-    }
-
-    blockquote {
-        padding-left: 1rem;
-        border-left: 2px solid rgba(#0D0D0D, 0.1);
-    }
-
-    hr {
-        border: none;
-        border-top: 2px solid rgba(#0D0D0D, 0.1);
-        margin: 2rem 0;
-    }
-
-    ul[data-type="taskList"] {
-        list-style: none;
-        padding: 0;
-
-        li {
-            display: flex;
-            align-items: center;
-
-            > label {
-                flex: 0 0 auto;
-                margin-right: 0.5rem;
-                user-select: none;
-            }
-
-            > div {
-                flex: 1 1 auto;
-            }
-        }
-    }
+.option > .label {
+    margin-right: 10px;
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
     <div class="main-section">
         <div class="wrapper">
-            <h1>Welcome to the homepage 222</h1>
-            <NewsSection/>
+            <h1>Дзюдо Магнитогорск</h1>
+            <NewsSection v-if="settingPageIndex.newsList.state"/>
+            <EventsSections />
         </div>
     </div>
 </template>
@@ -10,9 +11,10 @@
 <script>
 import { useStore } from "~/store";
 import NewsSection from "~/components/sections/news-section.vue";
+import EventsSections from "~/components/sections/events-sections.vue";
 
 export default {
-   components: {NewsSection},
+   components: {EventsSections, NewsSection},
    data() {
       return {}
    },
@@ -25,7 +27,11 @@ export default {
          title: `${siteInfo.value.name.param}`,
       })
    },
-
+   computed: {
+      settingPageIndex() {
+         return useStore().getIndexPageSetting
+      }
+   }
 }
 
 </script>
