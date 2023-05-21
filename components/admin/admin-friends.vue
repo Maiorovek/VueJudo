@@ -31,21 +31,17 @@ export default {
    },
    methods: {
       addFriend() {
-          useStore().friends.push({
-              id: null,
-              number: '',
-              time: {
-                  from: '',
-                  to: '',
-              },
-              name: '',
-              address: '',
-          })
+         useStore().friends.push({
+            id: null,
+            number: '',
+            time: {
+               from: '',
+               to: '',
+            },
+            name: '',
+            address: '',
+         })
       },
    },
 }
 </script>
-
-<style scoped>
-
-</style>
