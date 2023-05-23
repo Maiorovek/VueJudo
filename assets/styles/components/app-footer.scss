@@ -38,6 +38,16 @@
                 max-width: 260px;
                 font-size: 15px;
 
+                &:first-child {
+                    transition: color .2s linear;
+
+                    &:hover {
+                        transition: color .2s linear;
+                        cursor: pointer;
+                        color: #9747FF;
+                    }
+                }
+
                 &:last-child {
                     font-size: 24px;
                     margin-bottom: 0;
