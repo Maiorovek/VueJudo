@@ -44,6 +44,10 @@ a {
     max-width: 1680px;
     margin: 0 auto;
     padding: 0 30px;
+
+    @media only screen and (max-width: 1710px ) {
+        max-width: 1324px;
+    }
 }
 
 .site {

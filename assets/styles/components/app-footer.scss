@@ -4,12 +4,9 @@
 
     &__inner {
         display: flex;
+        justify-content: space-between;
 
         .footer__block {
-
-            &:first-child {
-                width: 70%;
-            }
 
             &__logo {
                 color: #fff;
@@ -37,7 +34,7 @@
             &__links {
                 color: #fff;
                 margin-bottom: 15px;
-                max-width: 360px;
+                max-width: 260px;
                 font-size: 15px;
                 
                 &:last-child {
