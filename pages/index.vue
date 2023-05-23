@@ -3,7 +3,7 @@
         <div class="wrapper">
             <h1>Дзюдо Магнитогорск</h1>
             <NewsSection v-if="settingPageIndex.newsList.state"/>
-            <EventsSections />
+            <EventsSections/>
         </div>
     </div>
 </template>

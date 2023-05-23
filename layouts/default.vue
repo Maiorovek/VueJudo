@@ -17,6 +17,7 @@ onMounted(() => {
    useStore().fetchArticleCategories()
    useStore().fetchArticlesList()
    useStore().fetchEventsList()
+   useStore().fetchFriendsList()
 })
 const siteInfo = computed(() => useStore().getSiteSetting)
 

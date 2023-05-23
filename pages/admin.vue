@@ -28,9 +28,6 @@ export default {
       });
       useHead({
          title: `${siteInfo.value.name.param} : Админ`,
-         meta: [{
-            name: 'Админ-панель',
-         }]
       })
    },
    components: {
@@ -44,7 +41,7 @@ export default {
    },
    data() {
       return {
-         selectComponent: shallowRef(adminEvents),
+         selectComponent: shallowRef(adminMain),
       }
    },
    methods: {

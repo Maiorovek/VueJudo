@@ -1,14 +1,14 @@
 <template>
-   <section class="events-section">
-      <h2 class="events-section__title title-section">
-         События
-      </h2>
-      <div class="events-sections__inner">
-         <FullCalendar class="events-table" :options="calendarOptions" />
-         <FullCalendar class="events-table" :options="calendar" :key="calendar.key" />
-      </div>
-      <div class="fuck-yeah"> </div>
-   </section>
+    <section class="events-section">
+        <h2 class="events-section__title title-section">
+            События
+        </h2>
+        <div class="events-sections__inner" ref="calendar">
+            <FullCalendar class="events-table" :options="calendarOptions"/>
+            <FullCalendar class="events-table" :options="calendar" :key="calendar.key"/>
+        </div>
+        <div class="fuck-yeah"></div>
+    </section>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
          title: `События`,
       })
    },
-   components: { FullCalendar },
+   components: {FullCalendar},
    data() {
       return {
          calendarOptions: {
@@ -37,7 +37,7 @@ export default {
             headerToolbar: {
                left: "",
                right: "",
-               center: "dayGridMonth,timeGridWeek"
+               center: "dayGridMonth,title,timeGridWeek"
             },
             buttonText: {
                prev: '<',
@@ -106,10 +106,15 @@ export default {
       }
    },
    methods: {
-      selectDay(day) {
+      selectDay(day, event) {
+         const parentNode = event.target.closest('td')
+         const calendar = this.$refs.calendar
          const originalDate = new Date(day);
          const timezoneOffset = originalDate.getTimezoneOffset() * 60000;
          const formattedDate = new Date(originalDate - timezoneOffset).toISOString().substring(0, 10);
+
+         if (calendar.querySelector('.fs-selected-day')) calendar.querySelector('.fs-selected-day').classList.remove('fs-selected-day')
+         parentNode.classList.add('fs-selected-day')
 
          if (this.calendar.initialDate !== formattedDate) {
             this.calendar.initialDate = formattedDate

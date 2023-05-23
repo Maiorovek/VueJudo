@@ -2,10 +2,7 @@
     <div class="admin-view__inner">
         <h2 class="admin-title" v-text="'Главная'"/>
         <div class="admin-item" v-for="item in siteSetting">
-            <adminEdit
-              :editItem="item"
-              @changedItem="changedItem"
-            />
+            <adminEdit :editItem="item"/>
         </div>
     </div>
 </template>
@@ -26,11 +23,6 @@ export default {
    },
    data() {
       return {}
-   },
-   methods: {
-      changedItem(value) {
-
-      }
    },
    computed: {
       siteSetting() {
