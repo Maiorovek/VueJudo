@@ -219,7 +219,7 @@ export const useStore = defineStore('store', {
       },
       async removeItem(data, type, path) {
          this[type] = this[type].filter(item => item.id !== data.id)
-         if (path !== '') await deleteDocument(path, data.indexDB)
+         await deleteDocument(path, data.indexDB)
       },
 
       async fetchArticleCategories() {
