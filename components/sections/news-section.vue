@@ -5,12 +5,10 @@
                 <img :src="news.preview" alt="">
             </div>
             <div class="news-content">
-                <div class="content-top">
-                    <div class="category" v-text="categoryName(news.category)"/>
-                    <div class="data" v-text="formatedDate(news.date)"/>
-                </div>
-                <span class="title" v-text="news.name"/>
-                <div class="description" v-html="news.content"/>
+               <div class="category" v-text="categoryName(news.category)"/>
+               <div class="title" v-text="news.name"/>
+               <div class="description" v-html="news.content"/>
+               <div class="data" v-text="formatedDate(news.date)"/>
             </div>
         </div>
     </section>

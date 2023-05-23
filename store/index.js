@@ -5,6 +5,8 @@ import deleteDocument from "~/server/deleteDocument";
 import createDocument from "~/server/createDocument";
 import updateDocument from "~/server/updateDocument";
 import createObject from "~/utils/createObject";
+import fetchDocuments from "~/server/fetchDocuments";
+
 
 export const useStore = defineStore('store', {
    state: () => ({
@@ -40,12 +42,12 @@ export const useStore = defineStore('store', {
          },
       ],
       listAdminSidebar: [
-         // {
-         //    id: 0,
-         //    title: 'Сайт',
-         //    component: 'adminMain',
-         //    icon: 'mdi-home',
-         // },
+         {
+            id: 0,
+            title: 'Сайт',
+            component: 'adminMain',
+            icon: 'mdi-home',
+         },
          {
             id: 1,
             title: 'Новости',
@@ -94,7 +96,7 @@ export const useStore = defineStore('store', {
       siteSetting: {
          name: {
             name: 'Название сайта',
-            param: 'Дзюдо',
+            param: 'Федерация Дзюдо',
          },
       },
       indexPageSetting: {
@@ -130,6 +132,11 @@ export const useStore = defineStore('store', {
    actions: {
       changeAdminSidebarState() {
          this.adminSidebarIsOpen = !this.adminSidebarIsOpen
+      },
+      changeSiteSetting(data, object) {
+         this.siteSetting[object] = {
+            ...data
+         }
       },
       setErrorAuth(value, type) {
          let typeString = ''
@@ -204,72 +211,58 @@ export const useStore = defineStore('store', {
          await updateDocument(path, newData, indexDB, type)
       },
       async addItem(data, type, path) {
+         this[type].sort((prev, next) => prev.id - next.id);
          const lastIndex = this[type].at(-1) ? this[type].at(-1).id + 1 : 1
          const newDate = createObject(lastIndex, data, type)
+         this[type].push(newDate)
          await createDocument(path, newDate)
       },
       async removeItem(data, type, path) {
          this[type] = this[type].filter(item => item.id !== data.id)
-         if (data.id !== null) await deleteDocument(path, data.indexDB)
+         if (path !== '') await deleteDocument(path, data.indexDB)
       },
+
       async fetchArticleCategories() {
-         onSnapshot(collection(database, 'article-categories'), querySnapshot => {
-            querySnapshot.forEach((doc) => {
-               if (this.categories.filter(item => item.id === doc.data().id).length < 1) {
-                  this.categories.push({
-                     ...doc.data(),
-                     indexDB: doc.id,
-                  })
-               }
-            });
-         });
-         this.categories.sort((prev, next) => {
-            return prev.id - next.id
+         await fetchDocuments('article-categories', doc => {
+            if (this.categories.filter(item => item.id === doc.data().id).length < 1) {
+               this.categories.push({
+                  ...doc.data(),
+                  indexDB: doc.id,
+               })
+            }
          });
       },
+
       async fetchArticlesList() {
-         onSnapshot(collection(database, 'articles-list'), querySnapshot => {
-            querySnapshot.forEach((doc) => {
-               if (this.articles.filter(item => item.id === doc.data().id).length < 1) {
-                  this.articles.push({
-                     ...doc.data(),
-                     indexDB: doc.id,
-                  })
-               }
-            });
-         });
-         this.articles.sort((prev, next) => {
-            return prev.id - next.id
+         await fetchDocuments('articles-list', doc => {
+            if (this.articles.filter(item => item.id === doc.data().id).length < 1) {
+               this.articles.push({
+                  ...doc.data(),
+                  indexDB: doc.id,
+               })
+            }
          });
       },
+
       async fetchEventsList() {
-         onSnapshot(collection(database, 'events-list'), querySnapshot => {
-            querySnapshot.forEach((doc) => {
-               if (this.events.filter(item => item.id === doc.data().id).length < 1) {
-                  this.events.push({
-                     ...doc.data(),
-                     indexDB: doc.id,
-                  })
-               }
-            });
-         });
-         this.events.sort((prev, next) => {
-            return prev.id - next.id
+         await fetchDocuments('events-list', doc => {
+            if (this.events.filter(item => item.id === doc.data().id).length < 1) {
+               this.events.push({
+                  ...doc.data(),
+                  indexDB: doc.id,
+               })
+            }
          });
       },
+
       async fetchFriendsList() {
-         onSnapshot(collection(database, 'companions-list'), querySnapshot => {
-            querySnapshot.forEach((doc) => {
-               if (this.friends.filter(item => item.id === doc.data().id).length < 1) {
-                  this.friends.push({
-                     ...doc.data(),
-                     indexDB: doc.id,
-                  })
-               }
-            });
-         });
-         this.friends.sort((prev, next) => {
-            return prev.id - next.id
+         await fetchDocuments('companions-list', doc => {
+            if (this.friends.filter(item => item.id === doc.data().id).length < 1) {
+               this.friends.push({
+                  ...doc.data(),
+                  indexDB: doc.id,
+               })
+            }
          });
       },
    },

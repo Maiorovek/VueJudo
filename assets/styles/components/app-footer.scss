@@ -1,15 +1,13 @@
 .footer-section {
     background: #131313;
-    padding: 40px 0px;
+    padding: 40px 0;
+    margin-top: 40px;
 
     &__inner {
         display: flex;
+        justify-content: space-between;
 
         .footer__block {
-
-            &:first-child {
-                width: 70%;
-            }
 
             &__logo {
                 color: #fff;
@@ -18,7 +16,7 @@
                 .logo__image {
                     font-size: 32px;
                 }
-                
+
                 .logo__text {
                     max-width: 200px;
                     margin-left: 8px;
@@ -37,9 +35,9 @@
             &__links {
                 color: #fff;
                 margin-bottom: 15px;
-                max-width: 360px;
+                max-width: 260px;
                 font-size: 15px;
-                
+
                 &:last-child {
                     font-size: 24px;
                     margin-bottom: 0;

@@ -27,6 +27,12 @@
                    data-maska="##:## - ##:##" class="input">
         </div>
 
+        <div class="link" ref="link">
+            <span v-if="!isChange" v-text="friend.link"/>
+            <input v-else placeholder="Сайт" required-input v-model="link" name="link" type="text"
+                   class="input">
+        </div>
+
         <VButton :text="isChange ? 'Отменить' : 'Изменить'" @click="replaceDivsWithInputs"/>
         <VButton :text="isChange ? this.friend.id === null ? 'Добавить' : 'Сохранить' : 'Удалить'" class="red"
                  @click="deleteFriend"/>
@@ -50,6 +56,7 @@ export default {
          name: '',
          address: '',
          time: '',
+         link: '',
       }
    },
    props: {
@@ -68,8 +75,9 @@ export default {
 
          if (this.friend.id === null) {
             const newData = this.createObject()
+            useStore().removeItem(this.friend, 'friends', '')
             useStore().addItem(newData, 'friends', 'companions-list')
-            useStore().removeItem(this.friend, 'friends')
+            this.replaceDivsWithInputs()
             return false
          }
 
@@ -82,7 +90,7 @@ export default {
       },
       replaceDivsWithInputs() {
          if (this.friend.id === null) {
-            useStore().removeItem(this.friend, 'friends')
+            useStore().removeItem(this.friend, 'friends', '')
          }
 
          if (!this.isChange) {
@@ -108,7 +116,7 @@ export default {
          }
       },
       createObject() {
-         const {number, name, address} = this;
+         const {number, name, address, link} = this;
          const time = this.time.split('-')
 
          const newObject = {
@@ -117,6 +125,7 @@ export default {
             number,
             name,
             address,
+            link,
             time: {
                from: time[0].trim(),
                to: time[1].trim()
@@ -131,10 +140,11 @@ export default {
          return newObject
       },
       setDefault() {
-         const {number, name, address, time} = this.friend;
+         const {number, name, address, time, link} = this.friend;
          this.number = number;
          this.name = name;
          this.address = address;
+         this.link = link;
          this.time = `${time.from} - ${time.to}`;
       },
    },
