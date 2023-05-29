@@ -68,7 +68,9 @@ import transliter from "~/utils/translit";
 
 export default {
    name: "add-articles",
-   components: {Editor},
+   components: {
+      Editor
+   },
    setup() {
       useHead({
          titleTemplate: '%s : Добавление статьи',
@@ -138,7 +140,7 @@ export default {
       addItem() {
          let data = {...this.createObject}
          if (data.hasOwnProperty('indexDB')) {
-             delete data.indexDB
+            delete data.indexDB
          }
          useStore().addItem(data, 'articles', 'articles-list')
          this.returnToBack()

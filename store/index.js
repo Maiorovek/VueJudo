@@ -1,17 +1,15 @@
 import { defineStore } from 'pinia'
-import { collection, onSnapshot } from "firebase/firestore";
-import { database } from "~/server/setting";
 import deleteDocument from "~/server/deleteDocument";
 import createDocument from "~/server/createDocument";
 import updateDocument from "~/server/updateDocument";
 import createObject from "~/utils/createObject";
 import fetchDocuments from "~/server/fetchDocuments";
 
-
 export const useStore = defineStore('store', {
    state: () => ({
       adminSidebarIsOpen: true,
       editedModalState: false,
+      modalFriendState: true,
       editedModalData: {
          title: '',
          data: {
@@ -116,6 +114,7 @@ export const useStore = defineStore('store', {
       getListAdminSidebar: state => state.listAdminSidebar,
       getMenuList: state => state.menuList,
       getStateEditedModal: state => state.editedModalState,
+      getStateAdminModalFriend: state => state.modalFriendState,
       getDataEditedModal: state => state.editedModalData,
       getCategories: state => state.categories,
       getArticles: state => state.articles,
@@ -176,6 +175,9 @@ export const useStore = defineStore('store', {
       },
       changeModalState() {
          this.editedModalState = !this.editedModalState
+      },
+      changeModalFriendState() {
+         this.modalFriendState = !this.modalFriendState
       },
       changeModalData(information, type, action, title = 'Изменить категорию', path, event) {
          const data = action === 'change'

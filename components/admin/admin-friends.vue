@@ -50,7 +50,7 @@ export default {
                return !this.search || data.name.toLowerCase().includes(this.search.trim().toLowerCase())
             }
          )
-      }
+      },
    },
    methods: {
       editItem(index) {
@@ -58,7 +58,10 @@ export default {
       },
       removeItem(data) {
          useStore().changeModalData(data, 'friends', 'remove', 'Удалить друга?', 'companions-list')
-      }
+      },
+      addFriend() {
+         useStore().changeModalFriendState()
+      },
    },
 }
 </script>

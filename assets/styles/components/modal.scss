@@ -57,4 +57,15 @@
         column-gap: 180px;
         margin-top: 30px;
     }
+
+    &.modal-friend {
+
+        input {
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
 }

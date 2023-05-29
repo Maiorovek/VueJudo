@@ -1,12 +1,12 @@
 <template>
     <div class="modal-edit__wrapper" v-if="stateModal">
         <div class="modal-edit">
-      <span
-        class="modal-edit__close"
-        @click="changeModalState"
-      >
-        <v-icon icon="mdi-close"/>
-      </span>
+            <span
+              class="modal-edit__close"
+              @click="changeModalState"
+            >
+                <v-icon icon="mdi-close"/>
+            </span>
             <h1
               :style="styleTitle"
               class="modal-edit__title"
