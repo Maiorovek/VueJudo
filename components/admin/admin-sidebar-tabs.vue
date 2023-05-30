@@ -54,6 +54,7 @@ export default {
    },
    methods: {
       selectView(component) {
+         this.selectComponent = component
          this.$emit('currentComponent', shallowRef(component))
       },
       openMiniList() {
@@ -64,6 +65,12 @@ export default {
       listSidebar() {
          return useStore().getListAdminSidebar
       },
+   },
+   mounted() {
+      this.selectComponent = sessionStorage.getItem('currentComponentAdmin')
+         ? sessionStorage.getItem('currentComponentAdmin')
+         : 'adminMain'
+      this.$emit('currentComponent', this.selectComponent)
    },
 }
 </script>

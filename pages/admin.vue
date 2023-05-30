@@ -1,7 +1,7 @@
 <template>
     <div class="admin__inner">
         <adminSidebar @currentComponent="currentComponent"/>
-        <div class="admin-view" :class="{'morePad': !stateAdminSidebar}">
+        <div class="admin-view" :class="{'morePad': !this.stateAdminSidebar}">
             <Component :is="selectComponent" @currentComponent="currentComponent"/>
         </div>
     </div>
@@ -44,6 +44,11 @@ export default {
          selectComponent: shallowRef(adminMain),
       }
    },
+   computed: {
+      stateAdminSidebar() {
+         return useStore().getStateAdminSidebar
+      }
+   },
    methods: {
       currentComponent(component) {
          sessionStorage.setItem('currentComponentAdmin', component.value);
@@ -55,10 +60,5 @@ export default {
          ? sessionStorage.getItem('currentComponentAdmin')
          : 'adminMain'
    },
-   computed: {
-      stateAdminSidebar() {
-         return useStore().getStateAdminSidebar
-      }
-   }
 }
 </script>

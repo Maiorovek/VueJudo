@@ -1,5 +1,11 @@
 .events-sections__inner {
 
+    .fc-header-toolbar .fc-toolbar-chunk div{
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+
     .fc-theme-standard td,
     .fc-theme-standard th {
         border: none;

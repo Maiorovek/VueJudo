@@ -8,3 +8,13 @@
 //       this.categories.push(doc.data())
 //    });
 // });
+
+
+// const fetchDocuments = async (collectionName, callback) => {
+//    await onSnapshot(collection(database, collectionName), querySnapshot => {
+//       querySnapshot.forEach(doc => {
+//          callback(doc);
+//       });
+//    });
+//
+// }

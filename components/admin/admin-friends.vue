@@ -27,14 +27,12 @@
 
 <script>
 import { useStore } from "~/store";
-import adminFriendsItem from "./admin-friends-item.vue"
 import vButton from "~/components/ui/v-button.vue";
 
 export default {
    name: "admin-friends",
    components: {
       vButton,
-      adminFriendsItem
    },
    data() {
       return {
@@ -53,14 +51,14 @@ export default {
       },
    },
    methods: {
-      editItem(index) {
-         console.log(index)
+      editItem(data) {
+         useStore().changeModalFriend(data, 'edit')
       },
       removeItem(data) {
          useStore().changeModalData(data, 'friends', 'remove', 'Удалить друга?', 'companions-list')
       },
       addFriend() {
-         useStore().changeModalFriendState()
+         useStore().changeModalFriend({}, 'add')
       },
    },
 }

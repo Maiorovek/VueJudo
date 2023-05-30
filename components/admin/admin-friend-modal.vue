@@ -15,11 +15,13 @@
               class="input"
               type="text"
               placeholder="Название"
+              v-model="name"
             >
             <input
               class="input"
               type="text"
               placeholder="Адрес"
+              v-model="address"
             >
             <input
               class="input"
@@ -27,6 +29,7 @@
               placeholder="Номер телефона"
               v-maska
               data-maska="8-(###)-###-##-##"
+              v-model="number"
             >
             <input
               class="input"
@@ -34,36 +37,25 @@
               placeholder="Время работы"
               v-maska
               data-maska="##:## - ##:##"
+              v-model="time"
             >
             <input
               class="input"
               type="text"
               placeholder="Сайт"
+              v-model="link"
             >
             <div class="modal-edit__buttons">
-<!--                <vButton-->
-<!--                  @click.prevent="cancelAction"-->
-<!--                  :text="cancelButtonName"-->
-<!--                  class="large"-->
-<!--                />-->
-<!--                <vButton-->
-<!--                  v-if="dataEdited.action === 'remove'"-->
-<!--                  class="red large"-->
-<!--                  @click.prevent="removeItem"-->
-<!--                  :text="'Да'"-->
-<!--                />-->
-<!--                <vButton-->
-<!--                  v-if="dataEdited.action === 'change'"-->
-<!--                  class="blue large"-->
-<!--                  @click.prevent="saveChanges"-->
-<!--                  :text="'Сохранить'"-->
-<!--                />-->
-<!--                <vButton-->
-<!--                  v-if="dataEdited.action === 'add'"-->
-<!--                  class="blue large"-->
-<!--                  @click.prevent="addItem"-->
-<!--                  :text="'Добавить'"-->
-<!--                />-->
+                <vButton
+                  @click.prevent="cancelAction"
+                  :text="'Отменить'"
+                  class="large"
+                />
+                <vButton
+                  class="red large"
+                  @click.prevent="saveChanges"
+                  :text="buttonText"
+                />
             </div>
         </div>
     </div>
@@ -75,33 +67,78 @@ import vButton from "~/components/ui/v-button.vue";
 
 export default defineComponent({
    name: "admin-friend-modal",
-   components: {vButton},
+   components: {
+      vButton
+   },
    data() {
       return {
-
+         name: '',
+         address: '',
+         number: '',
+         time: '',
+         link: '',
       }
    },
    computed: {
       stateModal() {
          return useStore().getStateAdminModalFriend
       },
+      dataFriend() {
+         return useStore().getModalFriendData
+      },
+      buttonText() {
+         console.log(this.dataFriend)
+         return this.dataFriend.action === 'edit' ? 'Изменить' : 'Добавить'
+      },
    },
    methods: {
       changeModalState() {
-         useStore().changeModalFriendState()
+         this.clearModal()
       },
       cancelAction() {
-         this.changeModalState()
+         this.clearModal()
       },
-      removeItem() {
-
+      clearModal() {
+         this.name = ''
+         this.address = ''
+         this.number = ''
+         this.link = ''
+         this.time = ''
+         useStore().changeModalFriend({}, '')
       },
       saveChanges() {
-
+         if (this.dataFriend.action === 'edit') {
+            useStore().saveChange(this.createObject(), this.dataFriend.data.id, 'friends', this.dataFriend.data.indexDB, 'companions-list')
+         } else {
+            useStore().addItem(this.createObject(), 'friends', 'companions-list')
+         }
+         this.clearModal()
       },
-      addItem() {
-
-      },
+      createObject() {
+         const timeArray = this.time.split(' ')
+         return {
+            ...this.dataFriend.data,
+            name: this.name,
+            address: this.address,
+            number: this.address,
+            link: this.link,
+            time: {
+               from: timeArray[0],
+               to: timeArray[2],
+            },
+         }
+      }
    },
+   watch: {
+      dataFriend() {
+         if (this.dataFriend.data.hasOwnProperty('id')) {
+            this.name = this.dataFriend.data.name
+            this.address = this.dataFriend.data.address
+            this.number = this.dataFriend.data.number
+            this.link = this.dataFriend.data.link
+            this.time = `${this.dataFriend.data.time.from} - ${this.dataFriend.data.time.to}`
+         }
+      }
+   }
 })
 </script>

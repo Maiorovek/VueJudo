@@ -7,7 +7,6 @@ const fetchDocuments = async (collectionName, callback) => {
          callback(doc);
       });
    });
-
 }
 
 export default fetchDocuments

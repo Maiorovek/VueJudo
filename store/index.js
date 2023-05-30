@@ -9,13 +9,17 @@ export const useStore = defineStore('store', {
    state: () => ({
       adminSidebarIsOpen: true,
       editedModalState: false,
-      modalFriendState: true,
       editedModalData: {
          title: '',
          data: {
             id: '',
             name: '',
          }
+      },
+      modalFriendState: false,
+      modalFriendData: {
+         data: {},
+         action: ''
       },
       menuList: [
          {
@@ -101,8 +105,12 @@ export const useStore = defineStore('store', {
          newsList: {
             state: true,
          },
+         calendar: {
+            state: true,
+         },
       },
       errorAuth: {},
+
       articles: [],
       categories: [],
       events: [],
@@ -126,7 +134,8 @@ export const useStore = defineStore('store', {
       getDataArticle: state => state.dataArticle,
       getEvents: state => state.events,
       getIndexPageSetting: state => state.indexPageSetting,
-      getFriendsList: state => state.friends
+      getFriendsList: state => state.friends,
+      getModalFriendData: state => state.modalFriendData
    },
    actions: {
       changeAdminSidebarState() {
@@ -202,6 +211,23 @@ export const useStore = defineStore('store', {
             action,
          }
       },
+      changeModalFriend(data = {}, action) {
+         this.changeModalFriendState()
+
+         if (action === 'create') {
+            return false
+         }
+
+         if (action === 'edit') {
+            this.modalFriendData = {
+               data: {
+                  ...data
+               },
+               action,
+            }
+         }
+      },
+
       async saveChange(data, index, type, indexDB, path) {
          const newData = createObject(null, data, type)
          this[type] = this[type].map(item => {
@@ -216,14 +242,12 @@ export const useStore = defineStore('store', {
          this[type].sort((prev, next) => prev.id - next.id);
          const lastIndex = this[type].at(-1) ? this[type].at(-1).id + 1 : 1
          const newDate = createObject(lastIndex, data, type)
-         this[type].push(newDate)
          await createDocument(path, newDate)
       },
       async removeItem(data, type, path) {
          this[type] = this[type].filter(item => item.id !== data.id)
          await deleteDocument(path, data.indexDB)
       },
-
       async fetchArticleCategories() {
          await fetchDocuments('article-categories', doc => {
             if (this.categories.filter(item => item.id === doc.data().id).length < 1) {
@@ -234,7 +258,6 @@ export const useStore = defineStore('store', {
             }
          });
       },
-
       async fetchArticlesList() {
          await fetchDocuments('articles-list', doc => {
             if (this.articles.filter(item => item.id === doc.data().id).length < 1) {
@@ -245,7 +268,6 @@ export const useStore = defineStore('store', {
             }
          });
       },
-
       async fetchEventsList() {
          await fetchDocuments('events-list', doc => {
             if (this.events.filter(item => item.id === doc.data().id).length < 1) {
@@ -256,7 +278,6 @@ export const useStore = defineStore('store', {
             }
          });
       },
-
       async fetchFriendsList() {
          await fetchDocuments('companions-list', doc => {
             if (this.friends.filter(item => item.id === doc.data().id).length < 1) {

@@ -13,7 +13,3 @@ import { useStore } from "@/store"
 
 const menuList = computed(() => useStore().getMenuList)
 </script>
-
-<style scoped>
-
-</style>
