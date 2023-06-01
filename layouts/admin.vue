@@ -6,21 +6,17 @@
     </section>
 </template>
 
-<script>
+<script setup>
 import EditedModal from "~/components/EditedModal.vue";
 import adminFriendModal from "~/components/admin/admin-friend-modal.vue";
 import { useStore } from "~/store";
 
-export default {
-   name: "admin",
-   components: {
-      EditedModal, adminFriendModal
-   },
-   mounted() {
-      useStore().fetchArticleCategories()
-      useStore().fetchArticlesList()
-      useStore().fetchEventsList()
-      useStore().fetchFriendsList()
-   },
-}
+const store = useStore()
+
+onMounted(() => {
+   store.fetchArticleCategories()
+   store.fetchArticlesList()
+   store.fetchEventsList()
+   store.fetchFriendsList()
+})
 </script>

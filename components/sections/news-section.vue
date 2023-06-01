@@ -16,39 +16,20 @@
     </section>
 </template>
 
-<script>
+<script setup>
 import { useStore } from "~/store";
 import formatDate from "~/utils/formatDate";
 
-export default {
-   name: "news-section",
-   data() {
-      return {}
-   },
-   computed: {
-      newsList() {
-         return useStore().getArticles
-      },
-      filteredListNews() {
-         return this.newsList.filter(news => {
-            return news.status
-         })
-      },
-      categoryList() {
-         return useStore().getCategories
-      },
-   },
-   methods: {
-      categoryName(index) {
-         return this.categoryList.find(item => item.id === index)?.name
-      },
-      formatedDate(date) {
-         return formatDate(date)
-      }
-   },
-}
+const store = useStore()
+
+const newsList = computed(() => store.getArticles)
+const categoryList = computed(() => store.getCategories)
+const filteredListNews = computed(() => {
+   return newsList.value.filter(news => {
+      return news.status
+   })
+})
+
+const categoryName = index => categoryList.value.find(item => item.id === index)?.name
+const formatedDate = date => formatDate(date)
 </script>
-
-<style scoped>
-
-</style>

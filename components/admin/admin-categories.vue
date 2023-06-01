@@ -17,44 +17,32 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { useStore } from "~/store";
-import vButton from "~/components/ui/v-button.vue";
+import VButton from "~/components/ui/v-button.vue";
 
-export default {
-   name: "admin-categories",
-   components: {vButton},
-   data() {
-      return {
-         search: '',
+useHead({
+   titleTemplate: '%s : Категории',
+})
+
+const store = useStore()
+const search = ref('')
+
+const categoriesList = computed(() => store.getCategories)
+const filterTableData = computed(() => {
+   return categoriesList.value.filter((data) => {
+         return !search.value || data.name.toLowerCase().includes(search.value.trim().toLowerCase())
       }
-   },
-   setup() {
-      useHead({
-         titleTemplate: '%s : Категории',
-      })
-   },
-   computed: {
-      filterTableData() {
-         return this.categoriesList.filter((data) => {
-               return !this.search || data.name.toLowerCase().includes(this.search.trim().toLowerCase())
-            }
-         )
-      },
-      categoriesList() {
-         return useStore().getCategories
-      },
-   },
-   methods: {
-      editItem(data) {
-         useStore().changeModalData(data, 'categories', 'change', null, 'article-categories')
-      },
-      removeItem(data) {
-         useStore().changeModalData(data, 'categories', 'remove', 'Удалить категорию?', 'article-categories')
-      },
-      addCategory() {
-         useStore().changeModalData(null, 'categories', 'add', 'Добавить категорию?', 'article-categories')
-      },
-   }
+   )
+})
+
+const editItem = data => {
+   store.changeModalData(data, 'categories', 'change', null, 'article-categories')
+}
+const removeItem = data => {
+   store.changeModalData(data, 'categories', 'remove', 'Удалить категорию?', 'article-categories')
+}
+const addCategory = () => {
+   store.changeModalData(null, 'categories', 'add', 'Добавить категорию?', 'article-categories')
 }
 </script>

@@ -4,17 +4,8 @@
     </div>
 </template>
 
-<script>
-export default {
-   name: "admin-pages",
-   setup() {
-      useHead({
-         titleTemplate: '%s : Страницы',
-      })
-   }
-}
+<script setup>
+useHead({
+   titleTemplate: '%s : Страницы',
+})
 </script>
-
-<style scoped>
-
-</style>

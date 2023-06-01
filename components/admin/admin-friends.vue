@@ -25,41 +25,27 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import VButton from "~/components/ui/v-button.vue";
 import { useStore } from "~/store";
-import vButton from "~/components/ui/v-button.vue";
 
-export default {
-   name: "admin-friends",
-   components: {
-      vButton,
-   },
-   data() {
-      return {
-         search: '',
+useHead({
+   titleTemplate: '%s : Друзья',
+})
+
+const store = useStore()
+const search = ref('')
+
+const friendsList = computed(() => store.getFriendsList)
+const filterTableData = computed(() => {
+   return friendsList.value.filter(data => {
+         return !search.value || data.name.toLowerCase().includes(search.value.trim().toLowerCase())
       }
-   },
-   computed: {
-      friendsList() {
-         return useStore().getFriendsList
-      },
-      filterTableData() {
-         return this.friendsList.filter((data) => {
-               return !this.search || data.name.toLowerCase().includes(this.search.trim().toLowerCase())
-            }
-         )
-      },
-   },
-   methods: {
-      editItem(data) {
-         useStore().changeModalFriend(data, 'edit')
-      },
-      removeItem(data) {
-         useStore().changeModalData(data, 'friends', 'remove', 'Удалить друга?', 'companions-list')
-      },
-      addFriend() {
-         useStore().changeModalFriend({}, 'add')
-      },
-   },
-}
+   )
+})
+
+const editItem = data => store.changeModalFriend(data, 'edit')
+const removeItem = data => store.changeModalData(data, 'friends', 'remove', 'Удалить друга?', 'companions-list')
+const addFriend = () => store.changeModalFriend({}, 'add')
+
 </script>

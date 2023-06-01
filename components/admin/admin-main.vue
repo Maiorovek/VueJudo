@@ -7,27 +7,17 @@
     </div>
 </template>
 
-<script>
-import { useStore } from "~/store";
-import adminEdit from "~/components/admin/admin-edit.vue";
+<script setup>
+import { useStore } from "~/store"
+import adminEdit from "~/components/admin/admin-edit.vue"
 
-export default {
-   name: "admin-main",
-   components: {
-      adminEdit,
-   },
-   setup() {
-      useHead({
-         titleTemplate: '%s : Главная',
-      })
-   },
-   data() {
-      return {}
-   },
-   computed: {
-      siteSetting() {
-         return Object.entries(useStore().getSiteSetting)
-      },
-   },
-}
+useHead({
+   titleTemplate: '%s : Главная',
+})
+
+const store = useStore()
+const siteSetting = computed(() => {
+   return Object.entries(store.getSiteSetting)
+})
+
 </script>

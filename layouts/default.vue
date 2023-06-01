@@ -13,18 +13,18 @@ import AppFooter from "~/components/footer/AppFooter.vue";
 import EditedModal from "~/components/EditedModal.vue";
 import { useStore } from "~/store";
 
-onMounted(() => {
-   useStore().fetchArticleCategories()
-   useStore().fetchArticlesList()
-   useStore().fetchEventsList()
-   useStore().fetchFriendsList()
-})
+const store = useStore()
+
 const siteInfo = computed(() => useStore().getSiteSetting)
 
 useHead({
-   title: siteInfo.value.nameSite,
-   meta: [{
-      name: 'Главная страница сайта',
-   }]
+   title: siteInfo.value.name.param,
+})
+
+onMounted(() => {
+   store.fetchArticleCategories()
+   store.fetchArticlesList()
+   store.fetchEventsList()
+   store.fetchFriendsList()
 })
 </script>

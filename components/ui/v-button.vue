@@ -1,41 +1,35 @@
 <template>
     <button
       class="button"
-      :class="{'disabled': isDisabled, 'loading': isLoading}"
-      :disabled="isDisabled">
-        <v-icon v-if="icon" :icon="'mdi-' + icon"/>
-        <span v-if="!isLoading" v-text="text"/>
-        <vLoader v-if="isLoading"/>
+      :class="{'disabled': props.isDisabled, 'loading': props.isLoading}"
+      :disabled="props.isDisabled">
+        <v-icon v-if="props.icon" :icon="'mdi-' + props.icon"/>
+        <span v-if="!isLoading" v-text="props.text"/>
+        <vLoader v-if="props.isLoading"/>
     </button>
 </template>
 
-<script>
-import vLoader from '~/components/ui/v-loader.vue'
+<script setup>
+import VLoader from "~/components/ui/v-loader.vue";
 
-export default {
-   name: "v-button",
-   components: {
-      vLoader
+const props = defineProps({
+   text: {
+      type: String,
+      required: true,
    },
-   props: {
-      text: {
-         type: String,
-         required: true,
-      },
-      icon: {
-         type: String,
-         required: false,
-      },
-      className: {
-         type: String,
-         default: 'default',
-      },
-      isLoading: {
-         type: Boolean
-      },
-      isDisabled: {
-         type: Boolean
-      },
+   icon: {
+      type: String,
+      required: false,
    },
-}
+   className: {
+      type: String,
+      default: 'default',
+   },
+   isLoading: {
+      type: Boolean
+   },
+   isDisabled: {
+      type: Boolean
+   },
+})
 </script>

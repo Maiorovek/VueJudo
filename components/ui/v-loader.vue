@@ -4,12 +4,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: "v-loader",
-}
+<script setup>
+
 </script>
-
-<style scoped>
-
-</style>

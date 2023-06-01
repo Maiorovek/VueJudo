@@ -45,30 +45,23 @@
 
 </template>
 
-<script>
+<script setup>
 import { useStore } from "~/store";
 
-export default {
-   name: "friends",
-   setup() {
-      useHead({
-         title: `Друзья`,
-      })
-   },
-   data() {
-      return {}
-   },
-   computed: {
-      friendsList() {
-         return useStore().getFriendsList
-      }
-   },
-   methods: {
-      extractNumbersAndPlusSigns(number) {
-         const regex = /(\d+|\+)/g;
-         const matches = number.match(regex);
-         return matches.join('')
-      }
-   }
+useHead({
+   title: `Друзья`,
+})
+
+const store = useStore()
+
+const friendsList = computed(() => {
+   return store.getFriendsList
+})
+
+const extractNumbersAndPlusSigns = number => {
+   const regex = /(\d+|\+)/g;
+   const matches = number.match(regex);
+   return matches.join('')
 }
+
 </script>

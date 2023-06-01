@@ -45,12 +45,10 @@
 
 <script>
 import { useStore } from "~/store";
-import VSelect from "~/components/ui/v-select.vue";
 import debounce from "~/utils/debounce";
 
 export default {
    name: 'news',
-   components: {VSelect},
    data() {
       return {
          searchNews: '',

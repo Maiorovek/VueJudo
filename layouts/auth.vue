@@ -9,8 +9,5 @@
     </section>
 </template>
 
-<script>
-export default {
-   name: "auth",
-}
+<script setup>
 </script>

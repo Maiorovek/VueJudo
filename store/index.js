@@ -214,18 +214,10 @@ export const useStore = defineStore('store', {
       changeModalFriend(data = {}, action) {
          this.changeModalFriendState()
 
-         if (action === 'create') {
-            return false
-         }
-
-         if (action === 'edit') {
-            this.modalFriendData = {
-               data: {
-                  ...data
-               },
-               action,
-            }
-         }
+         this.modalFriendData = {
+            data: action === 'edit' ? {...data} : {},
+            action,
+         };
       },
 
       async saveChange(data, index, type, indexDB, path) {
