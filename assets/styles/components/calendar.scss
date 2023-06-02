@@ -1,3 +1,7 @@
+:root {
+    --fc-now-indicator-color: #2B026F;
+    --fc-today-bg-color: rgba(43, 2, 111, .1); 
+}
 .events-sections__inner {
 
     .fc-header-toolbar .fc-toolbar-chunk div{
@@ -103,9 +107,7 @@
         display: block;
     }
 
-    .fc-day.fc-day-past.fc-daygrid-day,
-    .fc-day.fc-day-today.fc-daygrid-day,
-    .fc-day.fc-day-future.fc-daygrid-day {
+    .fc-day.fc-daygrid-day {
         transition: background-color .2s linear;
 
         &:hover {
@@ -118,14 +120,40 @@
                 transition: color .2s linear;
             }
         }
-
+    }
+    
+    .fc-col-header-cell-cushion {
+        color: #131313;
+        transition: color .2 linear;
     }
 
-    .fs-selected-day {
-        background-color: rgba(43, 2, 111, .1);
+    .fc-col-header-cell.fc-day, .fc-col-header-cell.fc-day.fc-day-today {
+        transition: background-color .2s linear;
 
-        .fc-daygrid-day-number {
-            color: #131313 !important;
+        &:hover {
+            cursor: pointer;
+            background-color: rgba(43, 2, 111, .1);
+            transition: background-color .2s linear;
+
+            .fc-col-header-cell-cushion {
+                color: #131313 !important;
+                transition: color .2s linear;
+            }
         }
     }
+
+    .fc-col-header-cell.fc-day.fc-day-today {
+        background-color: #2B026F;
+        
+        .fc-scrollgrid-sync-inner {
+
+            .fc-col-header-cell-cushion {
+                color: #fff;
+            }
+        }
+    }
+
+
+
+
 }

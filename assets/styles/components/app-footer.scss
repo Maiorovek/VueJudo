@@ -5,12 +5,9 @@
 
     &__inner {
         display: flex;
+        justify-content: space-between;
 
         .footer__block {
-
-            &:first-child {
-                width: 70%;
-            }
 
             &__logo {
                 color: #fff;
@@ -38,8 +35,18 @@
             &__links {
                 color: #fff;
                 margin-bottom: 15px;
-                max-width: 360px;
+                max-width: 260px;
                 font-size: 15px;
+
+                &:first-child {
+                    transition: color .2s linear;
+
+                    &:hover {
+                        transition: color .2s linear;
+                        cursor: pointer;
+                        color: #9747FF;
+                    }
+                }
 
                 &:last-child {
                     font-size: 24px;
