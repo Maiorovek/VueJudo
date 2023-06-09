@@ -3,9 +3,7 @@
     grid-column-gap: 18px;
     row-gap: 36px;
     grid-template-columns: repeat(4, calc((100% - 54px) / 4));
-    grid-template-rows: 360px auto;
-
-    margin-bottom: 800px;
+    grid-template-rows: 360px 435px;;
 
     .news {
 
@@ -33,17 +31,13 @@
                 margin-top: 0;
                 max-width: 500px;
 
-                .category {  
-
-                }
-    
                 .title {
                     margin-top: 24px;
                     font-size: 28px;
                     font-weight: 600;
                     line-height: 38px;
                 }
-    
+
                 .description {
                     font-size: 20px;
                     margin-top: 16px;
@@ -82,7 +76,7 @@
                 font-size: 15px;
                 font-weight: 400;
             }
-            
+
             .title {
                 margin-top: 16px;
             }
@@ -94,7 +88,7 @@
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;   
+                -webkit-box-orient: vertical;
 
                 & > *:not(p) {
                     display: none;

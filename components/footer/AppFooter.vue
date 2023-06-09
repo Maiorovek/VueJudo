@@ -5,7 +5,7 @@
                 <div class="footer__block">
                     <div class="footer__block__logo">
                         <div class="logo__image">
-                            LOGO
+                            <img src="../../assets/images/icon.png" alt="">
                         </div>
                         <div class="logo__text">
                             Федерация борьбы дзюдо г. Магнитогорска
@@ -17,7 +17,7 @@
                 </div>
                 <div class="footer__block">
                     <div class="footer__block__links">
-                        <a href="tel:+73519235011">+7-(3519)-23-50-11</a>
+                        <a v-if="phone" :href="`tel:${phone.param}`" v-text="phone.param"/>
                     </div>
                     <div class="footer__block__links">
                         ул. Строителей, 40/1, Магнитогорск, Челябинская обл., 455000
@@ -29,10 +29,15 @@
             </div>
         </div>
     </section>
-</template>А
+</template>
 
 <script setup>
 
+import { useStore } from "~/store";
+
+const store = useStore()
+
 const getYear = computed(() => (new Date()).getFullYear())
+const phone = computed(() => store.getSiteSettingParam('phone'))
 
 </script>

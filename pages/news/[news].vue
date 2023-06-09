@@ -1,7 +1,8 @@
 <template>
     <section class="news-page">
         <div class="wrapper">
-            <div v-if="news === undefined">загрузка</div>
+            <div v-if="!news">загрузка</div>
+            <h2 class="news-page__title" v-text="this.news.name"/>
             <div v-html="news.content"></div>
         </div>
     </section>
@@ -18,7 +19,19 @@ export default {
    },
    computed: {},
    mounted() {
-      this.news = useStore().getArticle(this.$route.params.news)
+      const store = useStore()
+      const routeParamsNews = this.$route.params.news;
+      const storedNews = JSON.parse(localStorage.getItem('currentNews'));
+      const articleFromStore = store.getArticle(routeParamsNews);
+
+      if (articleFromStore === undefined) {
+         this.news = storedNews;
+      } else if (storedNews) {
+         this.news = articleFromStore;
+         localStorage.setItem('currentNews', JSON.stringify(this.news));
+      } else {
+         window.location.href = '/news'
+      }
    },
 }
 </script>

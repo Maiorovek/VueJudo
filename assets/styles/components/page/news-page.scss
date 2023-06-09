@@ -44,10 +44,10 @@
         border: 1px solid #E9E9F5;
         overflow: hidden;
         width: 100%;
-        max-width: calc((100% - 40px) / 3);
+        max-width: calc((100% - 60px) / 4);
         height: 400px;
         text-decoration: none;
-        border-radius: 10px;
+        border-radius: 12px;
 
         .news-preview {
             position: relative;
@@ -119,5 +119,9 @@
                 }
             }
         }
+    }
+
+    .news-page__title {
+        margin-bottom: 30px;
     }
 }

@@ -20,11 +20,6 @@ import listPlugin from '@fullcalendar/list';
 import { useStore } from "~/store";
 
 export default {
-   setup() {
-      useHead({
-         title: `События`,
-      })
-   },
    components: {FullCalendar},
    data() {
       return {

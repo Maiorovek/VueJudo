@@ -12,9 +12,14 @@
             &__logo {
                 color: #fff;
                 display: flex;
+                align-items: center;
 
                 .logo__image {
                     font-size: 32px;
+
+                    img {
+                        max-width: 50px;
+                    }
                 }
 
                 .logo__text {

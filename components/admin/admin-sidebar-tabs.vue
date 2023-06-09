@@ -67,8 +67,8 @@ export default {
       },
    },
    mounted() {
-      this.selectComponent = sessionStorage.getItem('currentComponentAdmin')
-         ? sessionStorage.getItem('currentComponentAdmin')
+      this.selectComponent = localStorage.getItem('currentComponentAdmin')
+         ? localStorage.getItem('currentComponentAdmin')
          : 'adminMain'
       this.$emit('currentComponent', this.selectComponent)
    },

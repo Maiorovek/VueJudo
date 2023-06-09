@@ -24,7 +24,7 @@ export default {
          layout: "default",
       });
       useHead({
-         title: `${siteInfo.value.name.param}`,
+         title: `${siteInfo.value?.name?.param}`,
       })
    },
    computed: {

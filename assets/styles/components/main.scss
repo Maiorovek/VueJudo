@@ -60,7 +60,7 @@ a {
 
 .wrapper {
     width: 100%;
-    max-width: 1680px;
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 30px;
 
@@ -72,8 +72,8 @@ a {
 .site {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    margin-top: 124px;
+    height: 100vh;
+    justify-content: space-between;
 }
 
 .title-section {

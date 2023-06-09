@@ -27,7 +27,7 @@ export default {
          auth: {auth}
       });
       useHead({
-         title: `${siteInfo.value.name.param} : Админ`,
+         title: `${siteInfo.value.name?.param} : Админ`,
       })
    },
    components: {
@@ -51,13 +51,13 @@ export default {
    },
    methods: {
       currentComponent(component) {
-         sessionStorage.setItem('currentComponentAdmin', component.value);
+         localStorage.setItem('currentComponentAdmin', component.value);
          this.selectComponent = shallowRef(component)
       },
    },
    mounted() {
-      this.selectComponent = sessionStorage.getItem('currentComponentAdmin')
-         ? sessionStorage.getItem('currentComponentAdmin')
+      this.selectComponent = localStorage.getItem('currentComponentAdmin')
+         ? localStorage.getItem('currentComponentAdmin')
          : 'adminMain'
    },
 }

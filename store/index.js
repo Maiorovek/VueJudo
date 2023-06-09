@@ -23,11 +23,6 @@ export const useStore = defineStore('store', {
       },
       menuList: [
          {
-            id: 0,
-            title: 'Главная',
-            link: '/',
-         },
-         {
             id: 1,
             title: 'Новости',
             link: '/news',
@@ -96,10 +91,6 @@ export const useStore = defineStore('store', {
          action: '',
       },
       siteSetting: {
-         name: {
-            name: 'Название сайта',
-            param: 'Федерация Дзюдо',
-         },
       },
       indexPageSetting: {
          newsList: {
@@ -119,6 +110,7 @@ export const useStore = defineStore('store', {
    getters: {
       getStateAdminSidebar: state => state.adminSidebarIsOpen,
       getSiteSetting: state => state.siteSetting,
+      getSiteSettingParam: state => name => state.siteSetting[name],
       getListAdminSidebar: state => state.listAdminSidebar,
       getMenuList: state => state.menuList,
       getStateEditedModal: state => state.editedModalState,
@@ -278,6 +270,11 @@ export const useStore = defineStore('store', {
                   indexDB: doc.id,
                })
             }
+         });
+      },
+      async fetchSiteSetting() {
+         await fetchDocuments('site-setting', doc => {
+            this.siteSetting[doc.id] = {...doc.data()}
          });
       },
    },

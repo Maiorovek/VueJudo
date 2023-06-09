@@ -1,6 +1,10 @@
 <template>
     <section class="news-section">
-        <div class="news" v-for="news in filteredListNews.slice(0, 3)">
+        <nuxt-link
+          v-for="news in filteredListNews.slice(0, 5)"
+          :to="`/news/${news.id}`"
+          class="news"
+        >
             <div class="image">
                 <img :src="news.preview" alt="">
             </div>
@@ -10,7 +14,7 @@
                <div class="description" v-html="news.content"/>
                <div class="data" v-text="formatedDate(news.date)"/>
             </div>
-        </div>
+        </nuxt-link>
     </section>
 </template>
 

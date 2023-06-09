@@ -14,6 +14,7 @@ import { useStore } from "~/store";
 const store = useStore()
 
 onMounted(() => {
+   store.fetchSiteSetting()
    store.fetchArticleCategories()
    store.fetchArticlesList()
    store.fetchEventsList()

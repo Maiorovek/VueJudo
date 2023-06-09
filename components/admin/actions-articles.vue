@@ -112,7 +112,6 @@ export default {
       },
    },
    mounted() {
-      console.log(this.dataPage.data.hasOwnProperty('id'))
       if (this.dataPage.data.hasOwnProperty('id')) {
          this.articleId = this.dataPage.data.id
          this.articleStatus = this.dataPage.data.status
