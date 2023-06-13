@@ -20,15 +20,27 @@ import adminFriends from "~/components/admin/admin-friends.vue";
 
 export default {
    setup() {
-      const siteInfo = computed(() => useStore().getSiteSetting)
+      const store = useStore()
+      const siteInfo = computed(() => store.getSiteSetting)
+
       definePageMeta({
          layout: "admin",
          middleware: 'check-auth',
          auth: {auth}
       });
       useHead({
-         title: `${siteInfo.value.name?.param} : Админ`,
+         title: `Админ`,
       })
+
+      const reactiveStore = reactive(store.setting);
+
+      watch(() => reactiveStore, () => {
+            useHead({
+               title: `${siteInfo.value.name.param} : Админ`,
+            })
+         },
+         {deep: true}
+      );
    },
    components: {
       adminMain,
@@ -60,5 +72,6 @@ export default {
          ? localStorage.getItem('currentComponentAdmin')
          : 'adminMain'
    },
+   watch: {}
 }
 </script>

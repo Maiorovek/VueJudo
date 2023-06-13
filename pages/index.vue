@@ -15,17 +15,26 @@ import EventsSections from "~/components/sections/events-sections.vue";
 
 export default {
    components: {EventsSections, NewsSection},
-   data() {
-      return {}
-   },
    setup() {
-      const siteInfo = computed(() => useStore().getSiteSetting)
+      const store = useStore()
+      const siteInfo = computed(() => store.getSiteSetting)
+
       definePageMeta({
          layout: "default",
       });
       useHead({
-         title: `${siteInfo.value?.name?.param}`,
+         title: ``,
       })
+
+      const reactiveStore = reactive(store.setting);
+
+      watch(() => reactiveStore, () => {
+            useHead({
+               title: `${siteInfo.value.name.param}`,
+            })
+         },
+         {deep: true}
+      );
    },
    computed: {
       settingPageIndex() {

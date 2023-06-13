@@ -90,8 +90,7 @@ export const useStore = defineStore('store', {
          data: {},
          action: '',
       },
-      siteSetting: {
-      },
+      setting: {},
       indexPageSetting: {
          newsList: {
             state: true,
@@ -100,8 +99,6 @@ export const useStore = defineStore('store', {
             state: true,
          },
       },
-      errorAuth: {},
-
       articles: [],
       categories: [],
       events: [],
@@ -109,8 +106,8 @@ export const useStore = defineStore('store', {
    }),
    getters: {
       getStateAdminSidebar: state => state.adminSidebarIsOpen,
-      getSiteSetting: state => state.siteSetting,
-      getSiteSettingParam: state => name => state.siteSetting[name],
+      getSiteSetting: state => state.setting,
+      getSiteSettingParam: state => name => state.setting[name],
       getListAdminSidebar: state => state.listAdminSidebar,
       getMenuList: state => state.menuList,
       getStateEditedModal: state => state.editedModalState,
@@ -119,7 +116,6 @@ export const useStore = defineStore('store', {
       getCategories: state => state.categories,
       getArticles: state => state.articles,
       getStateDownloadArticles: state => state.stateDownloadArticles,
-      getErrorAuth: state => state.errorAuth,
       getArticle: state => index => {
          return state.articles.find(news => news.id === Number(index))
       },
@@ -132,47 +128,6 @@ export const useStore = defineStore('store', {
    actions: {
       changeAdminSidebarState() {
          this.adminSidebarIsOpen = !this.adminSidebarIsOpen
-      },
-      changeSiteSetting(data, object) {
-         this.siteSetting[object] = {
-            ...data
-         }
-      },
-      setErrorAuth(value, type) {
-         let typeString = ''
-         let errorString = ''
-
-         switch (value) {
-            case 'auth/invalid-email':
-               typeString = 'login'
-               errorString = 'Введите действительный адрес электронной почты'
-               break;
-            case 'auth/user-not-found':
-               typeString = 'login'
-               errorString = 'Этот почтовый адрес не зарегистрирован'
-               break;
-            case 'auth/missing-password':
-               typeString = 'password'
-               errorString = 'Неверный формат пароля'
-               break;
-            case 'auth/wrong-password':
-               typeString = 'password'
-               errorString = 'Неверный пароль'
-               break;
-            case 'auth/too-many-requests':
-               typeString = 'login'
-               errorString = 'Слишком много попыток авторизации'
-               break;
-            default:
-               typeString = type
-               errorString = value
-               break;
-         }
-
-         this.errorAuth = {
-            value: errorString,
-            type: typeString
-         }
       },
       changeModalState() {
          this.editedModalState = !this.editedModalState
@@ -214,13 +169,19 @@ export const useStore = defineStore('store', {
 
       async saveChange(data, index, type, indexDB, path) {
          const newData = createObject(null, data, type)
-         this[type] = this[type].map(item => {
-            if (item.id === index) {
-               return {...newData}
+         if (type === 'setting') {
+            this[type][data.type] = {
+               ...newData
             }
-            return item
-         })
-         await updateDocument(path, newData, indexDB, type)
+         } else {
+            this[type] = this[type].map(item => {
+               if (item.id === index) {
+                  return {...newData}
+               }
+               return item
+            })
+         }
+         await updateDocument(path, newData, indexDB)
       },
       async addItem(data, type, path) {
          this[type].sort((prev, next) => prev.id - next.id);
@@ -274,7 +235,10 @@ export const useStore = defineStore('store', {
       },
       async fetchSiteSetting() {
          await fetchDocuments('site-setting', doc => {
-            this.siteSetting[doc.id] = {...doc.data()}
+            this.setting[doc.data().type] = {
+               ...doc.data(),
+               indexDB: doc.id,
+            }
          });
       },
    },

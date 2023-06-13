@@ -32,7 +32,7 @@ export default {
             headerToolbar: {
                left: "",
                right: "",
-               center: "dayGridMonth,title,timeGridWeek"
+               center: "title"
             },
             buttonText: {
                prev: '<',
@@ -117,7 +117,6 @@ export default {
          }
       }
    },
-   computed: {}
 }
 </script>
 

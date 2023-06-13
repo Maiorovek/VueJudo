@@ -49,7 +49,7 @@
 import { useStore } from "~/store";
 
 useHead({
-   title: `Друзья`,
+   title: `Наши друзья`,
 })
 
 const store = useStore()

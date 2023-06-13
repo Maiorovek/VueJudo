@@ -43,6 +43,11 @@ const createObject = (index: number | null, data: any, type: string) => {
                 id: index === null ? data.id : index,
             }
             break;
+        case 'setting':
+            newData = {
+                ...data,
+            }
+            break;
     }
     return newData
 }
