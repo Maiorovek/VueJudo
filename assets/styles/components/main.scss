@@ -60,12 +60,17 @@ a {
 
 .wrapper {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1680px;
     margin: 0 auto;
     padding: 0 30px;
 
     @media only screen and (max-width: 1710px ) {
         max-width: 1324px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        max-width: 100%;
+        padding: 0 15px;
     }
 }
 
@@ -74,6 +79,7 @@ a {
     flex-direction: column;
     height: 100vh;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 
 .title-section {

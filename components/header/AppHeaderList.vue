@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { useStore } from "@/store"
+import { state } from "@/store/state"
 
-const menuList = computed(() => useStore().getMenuList)
+const menuList = computed(() => state().getMenuList)
 </script>

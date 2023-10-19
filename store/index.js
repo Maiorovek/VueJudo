@@ -16,89 +16,11 @@ export const useStore = defineStore('store', {
             name: '',
          }
       },
-      modalFriendState: false,
-      modalFriendData: {
-         data: {},
-         action: ''
-      },
-      menuList: [
-         {
-            id: 1,
-            title: 'Новости',
-            link: '/news',
-         },
-         {
-            id: 2,
-            title: 'События',
-            link: '/events',
-         },
-         {
-            id: 3,
-            title: 'Наши друзья',
-            link: '/friends',
-         },
-      ],
-      listAdminSidebar: [
-         {
-            id: 0,
-            title: 'Сайт',
-            component: 'adminMain',
-            icon: 'mdi-home',
-         },
-         {
-            id: 1,
-            title: 'Новости',
-            component: null,
-            icon: 'mdi-newspaper',
-            list: [
-               {
-                  id: 0,
-                  title: 'Категории',
-                  component: 'adminCategories',
-                  icon: 'mdi-format-list-bulleted',
-               },
-               {
-                  id: 1,
-                  title: 'Статьи',
-                  component: 'adminArticles',
-                  icon: 'mdi-newspaper',
-               },
-            ]
-         },
-         {
-            id: 2,
-            title: 'События',
-            component: 'adminEvents',
-            icon: 'mdi-calendar-multiple',
-         },
-         // {
-         //    id: 3,
-         //    title: 'Страницы',
-         //    component: 'adminPages',
-         //    list: null,
-         //    icon: 'mdi-page-layout-body',
-         // },
-         {
-            id: 4,
-            title: 'Друзья',
-            component: 'adminFriends',
-            list: null,
-            icon: 'mdi-domain',
-         }
-      ],
       dataArticle: {
          data: {},
          action: '',
       },
       setting: {},
-      indexPageSetting: {
-         newsList: {
-            state: true,
-         },
-         calendar: {
-            state: true,
-         },
-      },
       articles: [],
       categories: [],
       events: [],
@@ -108,10 +30,8 @@ export const useStore = defineStore('store', {
       getStateAdminSidebar: state => state.adminSidebarIsOpen,
       getSiteSetting: state => state.setting,
       getSiteSettingParam: state => name => state.setting[name],
-      getListAdminSidebar: state => state.listAdminSidebar,
-      getMenuList: state => state.menuList,
+
       getStateEditedModal: state => state.editedModalState,
-      getStateAdminModalFriend: state => state.modalFriendState,
       getDataEditedModal: state => state.editedModalData,
       getCategories: state => state.categories,
       getArticles: state => state.articles,
@@ -121,9 +41,7 @@ export const useStore = defineStore('store', {
       },
       getDataArticle: state => state.dataArticle,
       getEvents: state => state.events,
-      getIndexPageSetting: state => state.indexPageSetting,
       getFriendsList: state => state.friends,
-      getModalFriendData: state => state.modalFriendData
    },
    actions: {
       changeAdminSidebarState() {
@@ -131,9 +49,6 @@ export const useStore = defineStore('store', {
       },
       changeModalState() {
          this.editedModalState = !this.editedModalState
-      },
-      changeModalFriendState() {
-         this.modalFriendState = !this.modalFriendState
       },
       changeModalData(information, type, action, title = 'Изменить категорию', path, event) {
          const data = action === 'change'
@@ -158,15 +73,6 @@ export const useStore = defineStore('store', {
             action,
          }
       },
-      changeModalFriend(data = {}, action) {
-         this.changeModalFriendState()
-
-         this.modalFriendData = {
-            data: action === 'edit' ? {...data} : {},
-            action,
-         };
-      },
-
       async saveChange(data, index, type, indexDB, path) {
          const newData = createObject(null, data, type)
          if (type === 'setting') {

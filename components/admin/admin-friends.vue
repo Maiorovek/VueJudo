@@ -28,12 +28,14 @@
 <script setup>
 import VButton from "~/components/ui/v-button.vue";
 import { useStore } from "~/store";
+import { state } from "~/store/state";
 
 useHead({
    titleTemplate: '%s : Друзья',
 })
 
 const store = useStore()
+const modalState = state()
 const search = ref('')
 
 const friendsList = computed(() => store.getFriendsList)
@@ -44,8 +46,8 @@ const filterTableData = computed(() => {
    )
 })
 
-const editItem = data => store.changeModalFriend(data, 'edit')
+const editItem = data => modalState.changeModalFriend(data, 'edit')
 const removeItem = data => store.changeModalData(data, 'friends', 'remove', 'Удалить друга?', 'companions-list')
-const addFriend = () => store.changeModalFriend({}, 'add')
+const addFriend = () => modalState.changeModalFriend({}, 'add')
 
 </script>

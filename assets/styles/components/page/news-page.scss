@@ -49,6 +49,18 @@
         text-decoration: none;
         border-radius: 12px;
 
+        @media only screen and (max-width: 1330px) {
+            max-width: calc((100% - 40px) / 3);
+        }
+
+        @media only screen and (max-width: 1050px) {
+            max-width: calc((100% - 20px) / 2);
+        }
+
+        @media only screen and (max-width: 718px) {
+            max-width: 100%;
+        }
+
         .news-preview {
             position: relative;
             width: 100%;

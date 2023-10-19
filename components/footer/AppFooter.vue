@@ -22,7 +22,7 @@
                     <div class="footer__block__links">
                         ул. Строителей, 40/1, Магнитогорск, Челябинская обл., 455000
                     </div>
-                    <div class="footer__block__links">
+                    <div class="footer__block__links" v-if="false">
                         l1 l2 l3
                     </div>
                 </div>

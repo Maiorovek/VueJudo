@@ -1,7 +1,8 @@
 <template>
     <section class="events">
         <div class="wrapper">
-            <FullCalendar :options="calendarOptions"/>
+            <h1 class="page-title">События</h1>
+            <FullCalendar class="events-page__table" :options="calendarOptions"/>
         </div>
     </section>
 </template>

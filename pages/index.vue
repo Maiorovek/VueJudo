@@ -10,6 +10,7 @@
 
 <script>
 import { useStore } from "~/store";
+import { state } from "~/store/state";
 import NewsSection from "~/components/sections/news-section.vue";
 import EventsSections from "~/components/sections/events-sections.vue";
 
@@ -38,7 +39,7 @@ export default {
    },
    computed: {
       settingPageIndex() {
-         return useStore().getIndexPageSetting
+         return state().getIndexPageSetting
       }
    }
 }

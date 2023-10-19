@@ -41,8 +41,7 @@ useHead({
    title: `Авторизация`,
 })
 
-import { useStore } from "~/store";
-import { error } from "~/store/error";
+import { authError } from "~/store/authError";
 import InputCustom from "~/components/ui/input-custom.vue";
 import loginAuth from "~/server/login";
 
@@ -60,9 +59,9 @@ const login = () => {
 
 const resetError = () => {
    buttonLoad.value = false
-   error().setErrorAuth('', '')
+   authError().setErrorAuth('', '')
 }
-const errorAuth = computed(() => error().getErrorAuth)
+const errorAuth = computed(() => authError().getErrorAuth)
 
 watch(() => loginValue.value, (actual, next) => {
    if (next !== actual && errorAuth.value !== '') resetError()
@@ -74,7 +73,7 @@ watch(() => passwordValue.value, (actual, next) => {
 
 const validateInput = (inputType, inputValue) => {
    if (!inputValue) {
-      error().setErrorAuth('Это поле обязательно для заполения', inputType)
+      authError().setErrorAuth('Это поле обязательно для заполения', inputType)
       buttonLoad.value = true
       return false
    }
@@ -82,7 +81,7 @@ const validateInput = (inputType, inputValue) => {
    if (inputType === "login") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(inputValue)) {
-         error().setErrorAuth('Некорректный адрес электронной почты', inputType)
+         authError().setErrorAuth('Некорректный адрес электронной почты', inputType)
          buttonLoad.value = true
          return false
       }
@@ -90,7 +89,7 @@ const validateInput = (inputType, inputValue) => {
 
    if (inputType === "password") {
       if (inputValue.length < 8) {
-         error().setErrorAuth('Пароль должен содержать не менее 8 символов', inputType)
+         authError().setErrorAuth('Пароль должен содержать не менее 8 символов', inputType)
          buttonLoad.value = true
          return false
       }

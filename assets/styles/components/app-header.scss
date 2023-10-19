@@ -7,7 +7,9 @@
     padding: 20px 10px;
     z-index: 100;
     margin-bottom: 30px;
+    position: relative;
 
+    
     .header-section__inner {
         display: flex;
         align-items: center;
@@ -15,10 +17,16 @@
     }
 
     .header-section__logo {
-        max-width: 60px;
+        display: flex;
+        align-items: center;
+        column-gap: 7px;
 
         & > * {
             max-width: 100%;
+        }
+
+        img {
+            max-width: 60px;
         }
     }
 
@@ -36,7 +44,7 @@
         transition: color .2s linear;
 
         &:hover {
-            color: #0048ff;
+            color: #9747FF;
             transition: color .2s linear;
         }
     }

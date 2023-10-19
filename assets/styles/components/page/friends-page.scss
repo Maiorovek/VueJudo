@@ -30,7 +30,8 @@
                     align-items: center;
                     column-gap: 16px;
 
-                    span, a {
+                    span,
+                    a {
                         font-weight: 400;
                         font-size: 20px;
                         line-height: 160%;
@@ -53,8 +54,35 @@
                         }
                     }
 
-                    .icon {
+                    .icon {}
+                }
+            }
+        }
 
+        @media only screen and (max-width: 768px) {
+            
+            .friends__list {
+
+                .friends__item {
+
+                    .item__name {
+                        font-size: 25px;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+
+        @media only screen and (max-width: 425px) {
+            font-size: 15px;
+
+            .friends__list {
+
+                .friends__item {
+
+                    .item__name {
+                        font-size: 20px;
+                        margin-bottom: 5px;
                     }
                 }
             }

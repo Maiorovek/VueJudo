@@ -23,7 +23,7 @@
                 }
 
                 .logo__text {
-                    max-width: 200px;
+                    max-width: 190px;
                     margin-left: 8px;
                     font-size: 15px;
                 }
@@ -33,7 +33,7 @@
             &__info {
                 color: #fff;
                 font-size: 15px;
-                max-width: 260px;
+                max-width: 240px;
                 margin-top: 15px;
             }
 
@@ -53,9 +53,32 @@
                     }
                 }
 
-                &:last-child {
-                    font-size: 24px;
-                    margin-bottom: 0;
+                // &:last-child {
+                //     font-size: 24px;
+                //     margin-bottom: 0;
+                // }
+            }
+        }
+
+        @media only screen and (max-width: 590px) {
+            flex-direction: column;
+            align-items: left;
+            
+            .footer__block {
+
+                &__logo{
+                    max-width: 100%;
+                }
+
+                &__info {
+                    max-width: 100%;
+                    margin: 0;
+                }
+
+                &__links {
+                    max-width: 100%;
+                    margin: 0;
+                    margin-top: 10px;
                 }
             }
         }

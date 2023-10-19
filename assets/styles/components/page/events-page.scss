@@ -1,0 +1,37 @@
+.events-page__table {
+
+    .fc-button {
+        background-color: #ffffff;
+        color: #131313;
+        border-color: white;
+        box-shadow: 0 2px 20px rgba(130, 130, 130, 0.2);
+        transition: color 0.2s linear;
+        border: none;
+
+        &:hover:not(:disabled) {
+            transition: background-color .3s linear;
+            background-color: rgba(43, 2, 111, .1);
+            // color: black;
+        }
+    }
+
+}
+.fc .fc-button-primary:disabled {
+    background-color: #2B026F;
+    opacity: 100;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: #2B026F;
+    
+}
+
+.fc .fc-button-primary:focus, 
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus, 
+.fc .fc-button-primary:not(:disabled):active:focus {
+    box-shadow: none;
+}
+
+.fc-header-toolbar .fc-toolbar .fc-toolbar-ltr {
+    margin-bottom: 0;
+}

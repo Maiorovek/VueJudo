@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { error } from "~/store/error";
+import { authError } from "~/store/authError";
 
 const loginAuth = (email, password) => {
    const auth = getAuth();
@@ -9,8 +9,8 @@ const loginAuth = (email, password) => {
       .then(() => {
          window.location.href = '/admin'
       })
-      .catch(errors => {
-         error().setErrorAuth(errors.code)
+      .catch(error => {
+         authError().setErrorAuth(error.code)
       });
 }
 

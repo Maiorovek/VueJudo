@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { useStore } from "~/store";
+import { state } from "~/store/state";
 
 export default {
    name: "admin-sidebar-tabs",
@@ -63,7 +63,7 @@ export default {
    },
    computed: {
       listSidebar() {
-         return useStore().getListAdminSidebar
+         return state().getListAdminSidebar
       },
    },
    mounted() {

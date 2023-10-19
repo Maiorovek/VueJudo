@@ -63,9 +63,11 @@
 
 <script setup>
 import { useStore } from "~/store";
+import { state } from "~/store/state";
 import VButton from "~/components/ui/v-button.vue";
 
 const store = useStore()
+const modalState = state()
 const name = ref('')
 const address = ref('')
 const number = ref('')
@@ -81,7 +83,7 @@ const clearModal = () => {
    number.value = ''
    link.value = ''
    time.value = ''
-   store.changeModalFriend({}, '')
+   modalState.changeModalFriend({}, '')
 }
 
 const saveChanges = () => {
@@ -109,8 +111,8 @@ const createObject = () => {
 }
 
 const buttonText = computed(() => dataFriend.value.action === 'edit' ? 'Изменить' : 'Добавить')
-const stateModal = computed(() => store.getStateAdminModalFriend)
-const dataFriend = computed(() => store.getModalFriendData)
+const stateModal = computed(() => modalState.getStateAdminModalFriend)
+const dataFriend = computed(() => modalState.getModalFriendData)
 
 watch(() => dataFriend.value.data, () => {
    if (dataFriend.value.data.hasOwnProperty('id')) {

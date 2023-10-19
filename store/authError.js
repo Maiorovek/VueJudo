@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const error = defineStore('error', {
+export const authError = defineStore('authError', {
    state: () => ({
       errorAuth: {},
    }),

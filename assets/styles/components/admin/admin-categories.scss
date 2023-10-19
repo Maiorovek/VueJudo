@@ -1,0 +1,43 @@
+@media only screen and (max-width: 680px) {
+
+    .el-table th.el-table__cell,
+    .el-table--enable-row-transition .el-table__body td.el-table__cell {
+        display: block;
+        justify-content: center;
+
+    }
+
+    .el-table__row {
+        display: table;
+        width: 90vw;
+    }
+
+    .modal-edit__wrapper .modal-edit {
+        width: 80%;
+    }
+
+    .modal-edit__wrapper .modal-edit__buttons {
+        column-gap: 0%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media only screen and (max-width: 410px) {
+
+    .modal-edit__wrapper .modal-edit__buttons {
+        display: flex;
+        flex-direction: column;
+        
+        .button.large:first-child {
+            margin-bottom: 10px;
+        }
+    }
+}
+@media only screen and (max-width: 610px) {
+
+    .fc .fc-toolbar {
+        display: flex;
+        flex-direction: column;
+    }
+}

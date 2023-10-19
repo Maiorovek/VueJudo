@@ -17,6 +17,7 @@ import actionsArticles from "~/components/admin/actions-articles.vue";
 import adminSidebar from "~/components/admin/admin-sidebar.vue";
 import adminEvents from "~/components/admin/admin-events.vue";
 import adminFriends from "~/components/admin/admin-friends.vue";
+import adminPages from "~/components/admin/admin-pages.vue";
 
 export default {
    setup() {
@@ -49,7 +50,8 @@ export default {
       actionsArticles,
       adminSidebar,
       adminEvents,
-      adminFriends
+      adminFriends,
+      adminPages
    },
    data() {
       return {

@@ -9,10 +9,10 @@
                 <img :src="news.preview" alt="">
             </div>
             <div class="news-content">
-               <div class="category" v-text="categoryName(news.category)"/>
-               <div class="title" v-text="news.name"/>
-               <div class="description" v-html="news.content"/>
-               <div class="data" v-text="formatedDate(news.date)"/>
+                <div class="category" v-text="categoryName(news.category)"/>
+                <div class="title" v-text="news.name"/>
+                <div class="description" v-html="news.content"/>
+                <div class="data" v-text="formatedDate(news.date)"/>
             </div>
         </nuxt-link>
     </section>
@@ -27,11 +27,14 @@ const store = useStore()
 const newsList = computed(() => store.getArticles)
 const categoryList = computed(() => store.getCategories)
 const filteredListNews = computed(() => {
-   return newsList.value.filter(news => {
-      return news.status
-   })
-})
-
+   const filteredNews = newsList.value.filter(news => news.status);
+   filteredNews.sort((a, b) => {
+      const dateA = new Date(a.date.split('.').reverse().join('-'));
+      const dateB = new Date(b.date.split('.').reverse().join('-'));
+      return dateB - dateA;
+   });
+   return filteredNews;
+});
 const categoryName = index => categoryList.value.find(item => item.id === index)?.name
 const formatedDate = date => formatDate(date)
 </script>

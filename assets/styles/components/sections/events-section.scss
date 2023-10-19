@@ -7,12 +7,20 @@
         .events-table {
             width: 50%;
             max-width: 50%;
-
         }
     }
 
-    .fuck-yeah {
-        margin-bottom: 40px;
-    }
+    @media only screen and (max-width: 930px) {
 
+        .events-sections__inner {
+            display: block;
+            column-gap: 0px;
+
+            .events-table {
+                width: 100%;
+                max-width: 100%;
+                height: 500px;
+            }
+        }
+    }
 }

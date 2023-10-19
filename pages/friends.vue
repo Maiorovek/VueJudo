@@ -2,8 +2,7 @@
     <section class="friends">
         <div class="wrapper">
             <div class="friends__inner">
-                <h1>Наши друзья</h1>
-
+                <h1 class="page-title">Наши друзья</h1>
                 <div class="friends__list">
                     <div class="friends__item" v-for="friend in friendsList">
                         <div class="item__name" v-text="friend.name"/>

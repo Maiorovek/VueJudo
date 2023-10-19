@@ -9,7 +9,7 @@
 
 <script setup>
 import { useStore } from "~/store"
-import adminEdit from "~/components/admin/admin-edit.vue"
+import adminEdit from "~/components/admin/admin-setting-edit.vue"
 
 useHead({
    titleTemplate: '%s : Главная',

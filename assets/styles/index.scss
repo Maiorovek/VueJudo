@@ -3,6 +3,7 @@
 @import "components/modal";
 @import "components/app-main";
 @import "components/app-header";
+@import "components/app-headerBurger.scss";
 @import "components/app-footer";
 @import "components/app-auth";
 @import "components/calendar";
@@ -14,6 +15,7 @@
 // Pages
 @import "components/page/news-page";
 @import "components/page/friends-page";
+@import "components/page/events-page.scss";
 
 // UI
 @import "components/ui/buttons";
@@ -24,3 +26,4 @@
 //Admin
 @import "components/admin/app-admin";
 @import "components/admin/admin-friends";
+@import "components/admin/admin-categories.scss";
