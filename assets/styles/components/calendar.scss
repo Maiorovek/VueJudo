@@ -1,10 +1,11 @@
 :root {
     --fc-now-indicator-color: #2B026F;
-    --fc-today-bg-color: rgba(43, 2, 111, .1); 
+    --fc-today-bg-color: rgba(43, 2, 111, .1);
 }
+
 .events-sections__inner {
 
-    .fc-header-toolbar .fc-toolbar-chunk div{
+    .fc-header-toolbar .fc-toolbar-chunk div {
         display: flex;
         align-items: center;
         column-gap: 10px;
@@ -121,13 +122,14 @@
             }
         }
     }
-    
+
     .fc-col-header-cell-cushion {
         color: #131313;
         transition: color .2 linear;
     }
 
-    .fc-col-header-cell.fc-day, .fc-col-header-cell.fc-day.fc-day-today {
+    .fc-col-header-cell.fc-day,
+    .fc-col-header-cell.fc-day.fc-day-today {
         transition: background-color .2s linear;
 
         &:hover {
@@ -144,7 +146,7 @@
 
     .fc-col-header-cell.fc-day.fc-day-today {
         background-color: #2B026F;
-        
+
         .fc-scrollgrid-sync-inner {
 
             .fc-col-header-cell-cushion {

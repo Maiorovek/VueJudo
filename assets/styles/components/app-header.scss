@@ -9,7 +9,7 @@
     margin-bottom: 30px;
     position: relative;
 
-    
+
     .header-section__inner {
         display: flex;
         align-items: center;
@@ -21,7 +21,7 @@
         align-items: center;
         column-gap: 7px;
 
-        & > * {
+        &>* {
             max-width: 100%;
         }
 
